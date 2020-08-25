@@ -1,0 +1,28 @@
+﻿<Window x:Class="ListControl.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ListControl"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <StackPanel>
+            <GroupBox Header="list box1" BorderBrush="Red">
+            <ListBox  Name="lst" SelectionChanged="Lst_SelectionChanged">
+                <CheckBox Margin="3">option 1</CheckBox>
+                <CheckBox Margin="3">option 2</CheckBox>
+            </ListBox>
+            </GroupBox>
+            <TextBox Name="tb" Text="{Binding mystring}"></TextBox>
+            <GroupBox Header="listbox Binding">
+                <ListBox Name="lstbinding" ItemsSource="{Binding Models,Mode=OneWay}"  DisplayMemberPath="Number" ></ListBox>
+            </GroupBox>
+
+
+
+        </StackPanel>
+
+    </Grid>
+</Window>

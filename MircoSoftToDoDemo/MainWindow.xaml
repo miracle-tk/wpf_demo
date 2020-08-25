@@ -1,0 +1,74 @@
+﻿<Window x:Class="MircoSoftToDoDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MircoSoftToDoDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"  WindowStyle="None" ResizeMode="CanResizeWithGrip" >
+    <Window.Resources>
+        <Style x:Key="mybutton" TargetType="Button">
+           
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <StackPanel Orientation="Horizontal" >
+                                <Border  Name="bd" Width="3" Background="{TemplateBinding Foreground}" Visibility="Hidden"></Border>
+                                <ContentPresenter  x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Visibility" TargetName="bd" Value="Visible"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+
+            </Setter>
+            <Style.Triggers>
+
+            </Style.Triggers>
+        </Style>
+        
+        
+        <DataTemplate x:Key="menulist">
+            
+                <Button Background="Green"  BorderThickness="0" HorizontalContentAlignment="Left"  Style="{StaticResource mybutton}">
+                    <DockPanel LastChildFill="True" >
+                        <TextBlock DockPanel.Dock="Left" Margin="10,0,0,0" FontFamily="{StaticResource IconFont}" Text="{Binding Icon}"></TextBlock>
+                    <TextBlock DockPanel.Dock="Left" Margin="10,0,0,0" Text="{Binding Menu}"></TextBlock>
+                    </DockPanel>
+                </Button>
+          
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <TextBlock Foreground="#8f8f8f" Margin="5,5,0,0">Mircosoft To-Do</TextBlock>
+            <DockPanel  Margin="10,5,0,5">
+                <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xe662;"></TextBlock>
+                <TextBlock Margin="5,0,0,0">woshiktk@163.com</TextBlock>
+                <TextBlock HorizontalAlignment="Right" FontFamily="{StaticResource IconFont}" Text="&#xe63c;"></TextBlock>
+            </DockPanel>
+
+            <ListBox ItemsSource="{Binding Meums}" ItemTemplate="{StaticResource menulist}">
+                <ListBox.Style>
+                    <Style >
+                        
+                    </Style>
+                </ListBox.Style>
+            </ListBox>
+
+
+
+
+        </StackPanel>
+
+    </Grid>
+</Window>

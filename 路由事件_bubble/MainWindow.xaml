@@ -1,0 +1,28 @@
+﻿<Window x:Class="路由事件_bubble.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:路由事件_bubble"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" MouseUp="DoSomeThing">
+    <Grid MouseUp="DoSomeThing">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" MouseUp="DoSomeThing">
+            <TextBlock MouseUp="DoSomeThing">dianwo</TextBlock>
+            <Label MouseUp="DoSomeThing">hehe</Label>
+            <Slider x:Name="slider1" />
+        </StackPanel>
+        <ListBox x:Name="listMsg" Grid.Row="1"/>
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <TextBox MinHeight="100" x:Name="input" KeyDown="keydown"></TextBox>
+            <CheckBox x:Name="isHandled" >handledChoose</CheckBox>
+        </StackPanel>
+        <Button x:Name="clear" Grid.Row="3" Click="Clear_Click">clear</Button>
+    </Grid>
+</Window>

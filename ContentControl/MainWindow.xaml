@@ -1,0 +1,19 @@
+﻿<Window x:Class="ContentControl.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ContentControl"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="300"> 
+            <Button Padding="10">
+                <Grid>
+                    <Polygon Points="100,25 125,0 200,25 125,50" Fill="LightSteelBlue"/>
+                    <Polygon Points="100,25 75,0 0,25 75,50" Fill="Yellow"/>
+                </Grid>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,26 @@
+﻿<Window x:Class="ContentControl_Expander.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ContentControl_Expander"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="200">
+    <Grid>
+        <StackPanel>
+            <Expander ExpandDirection="Right" Margin="5" Padding="5" Header="Region One">
+                <Button Padding="3">hidden button one</Button>
+            </Expander>
+            <Expander ExpandDirection="Right" Margin="5" Padding="5" Header="Region two">
+                <ScrollViewer Height="50">
+                    <TextBlock TextWrapping="Wrap" Language="zh-cn">
+                    hahahahahhahaahahahahahahahahahahhahahaha...
+                    </TextBlock>
+                </ScrollViewer>
+               
+            </Expander>
+            <TextBox ></TextBox>
+        </StackPanel>
+        
+    </Grid>
+</Window>

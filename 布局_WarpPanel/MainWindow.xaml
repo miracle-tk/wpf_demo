@@ -1,0 +1,29 @@
+﻿<Window x:Class="布局_WarpPanel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:布局_WarpPanel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Margin="5">
+            <Button VerticalAlignment="Top">top button</Button>
+            <Button MinHeight="60">min60 button</Button>
+            <Button VerticalAlignment="Bottom">bottom button</Button>
+            <Button >stretch button</Button>
+            <Button VerticalAlignment="Center">center button</Button>
+        </WrapPanel>
+        <DockPanel Grid.Row="1" LastChildFill="True">
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Padding="10" Margin="10,10,2,10" >OK</Button>
+                <Button Padding="10" Margin="2,10,10,10">Cancle</Button>
+            </StackPanel>
+            <TextBox></TextBox>
+        </DockPanel>
+    </Grid>
+</Window>
