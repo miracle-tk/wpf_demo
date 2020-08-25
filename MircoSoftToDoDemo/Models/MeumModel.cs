@@ -10,5 +10,7 @@ namespace MircoSoftToDoDemo.Models
     {
         public string Icon { get; set; }
         public string Menu { get; set; }
+        public string BackColor { get; set; }
+        public bool Display { get; set; } = true;
     }
 }
