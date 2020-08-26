@@ -65,8 +65,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\AddTaskDispConverter.cs" />
+    <Compile Include="Converters\addtaskIconConverter.cs" />
     <Compile Include="Converters\DateConverter.cs" />
+    <Compile Include="Converters\DateDisplayConverter.cs" />
     <Compile Include="Converters\DisplayToVisibility.cs" />
+    <Compile Include="Models\TaskInfo.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

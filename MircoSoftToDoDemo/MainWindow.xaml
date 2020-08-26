@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MircoSoftToDoDemo"
         xmlns:cv="clr-namespace:MircoSoftToDoDemo.Converters"
+        
         mc:Ignorable="d"
         Title="MainWindow"  Height="600" Width="1000" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
           ResizeMode="CanResizeWithGrip">
@@ -80,7 +81,9 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
         </Style>
         <DataTemplate x:Key="menulist">
-            <RadioButton   BorderThickness="0" HorizontalContentAlignment="Left"  Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
+            <RadioButton   BorderThickness="0" HorizontalContentAlignment="Left" 
+                           Command="{Binding SelectedCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:MainWindow}}}"
+                           Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" >
                 
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Margin="10,0,0,0" FontSize="22" FontFamily="{StaticResource IconFont}" Text="{Binding Icon}" Foreground="{Binding BackColor}"></TextBlock>
@@ -88,9 +91,14 @@
                 </StackPanel>
             </RadioButton>
         </DataTemplate>
+        
         <cv:DisplayToVisibility x:Key="displayToVis"></cv:DisplayToVisibility>
         <cv:DateConverter x:Key="dateconverter"></cv:DateConverter>
+        <cv:DateDisplayConverter x:Key="datedisp"></cv:DateDisplayConverter>
+        <cv:AddTaskDispConverter x:Key="addtaskconv"></cv:AddTaskDispConverter>
+        <cv:addtaskIconConverter x:Key="addtaskIconConv"></cv:addtaskIconConverter>
     </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="280"></ColumnDefinition>
@@ -104,7 +112,7 @@
                 <TextBlock HorizontalAlignment="Right" FontFamily="{StaticResource IconFont}" Text="&#xe63c;"></TextBlock>
             </DockPanel>
 
-            <ListBox ItemsSource="{Binding Meums}" ItemTemplate="{StaticResource menulist}" BorderThickness="0" SelectedItem="{Binding MeumItem}">
+            <ListBox ItemsSource="{Binding Meums}"  BorderThickness="0" SelectedItem="{Binding MeumItem}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -122,16 +130,27 @@
                         </Setter>
                     </Style>
                 </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <RadioButton   BorderThickness="0" HorizontalContentAlignment="Left" 
+                           Command="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=Window},
+                                Path=DataContext.SelectedCommand,Mode=TwoWay}"
+                           Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" >
+
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Margin="10,0,0,0" FontSize="22" FontFamily="{StaticResource IconFont}" Text="{Binding Icon}" Foreground="{Binding BackColor}"></TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="14" Text="{Binding Menu}" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </RadioButton>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
        </StackPanel>
 
         <Grid Grid.Column="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="160"></RowDefinition>
-                
                 <RowDefinition/>
-                <RowDefinition Height="90"></RowDefinition>
-
             </Grid.RowDefinitions>
             <Grid Background="{Binding MeumItem.BackColor}">
                 <Grid.RowDefinitions>
@@ -144,18 +163,215 @@
                     <Button Name="max" MinWidth="40" BorderThickness="0" Background="Transparent" Foreground="White" Click="Max_Click" >☐</Button>
                     <Button Name="close" MinWidth="40" BorderThickness="0" Background="Transparent" Foreground="White" Click="Close_Click">✕</Button>
                 </StackPanel>
-                <StackPanel VerticalAlignment="Bottom" Grid.Row="1">
-                    <StackPanel  Orientation="Horizontal" Margin="30,0,0,0">
-                        <TextBlock Name="ico" Visibility="{Binding MeumItem.Display, Converter={StaticResource displayToVis} }" Foreground="White" VerticalAlignment="Center" FontSize="40" FontFamily="{DynamicResource IconFont}" Text="{Binding MeumItem.Icon}"></TextBlock>
-                        <TextBlock Name="title" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="30" FontFamily="{DynamicResource IconFont}" Text="{Binding MeumItem.Menu}"></TextBlock>
+                <DockPanel   Grid.Row="1" LastChildFill="False" Margin="0,0,0,10">
+                    <StackPanel VerticalAlignment="Bottom" DockPanel.Dock="Left">
+                        <StackPanel  Orientation="Horizontal" Margin="30,0,0,0">
+                            <TextBlock Name="ico" Visibility="{Binding MeumItem.Display, Converter={StaticResource displayToVis} }" Foreground="White" VerticalAlignment="Center" FontSize="40" FontFamily="{DynamicResource IconFont}" Text="{Binding MeumItem.Icon}"></TextBlock>
+                            <TextBlock Name="title" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="30" FontFamily="{DynamicResource IconFont}" Text="{Binding MeumItem.Menu}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="35,0,0,0">
+                            <TextBlock  Visibility="{Binding Text, ElementName=title, Converter={StaticResource datedisp }}" Foreground="White" VerticalAlignment="Center" FontSize="20" Text="{Binding Text, ElementName=title, Converter={StaticResource dateconverter}}"></TextBlock>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Margin="35,0,0,0">
-                        <TextBlock Visibility="{Binding Visibility,ElementName=ico}" Foreground="White" VerticalAlignment="Center" FontSize="20" Text="{Binding Text, ElementName=title, Converter={StaticResource dateconverter}}"></TextBlock>
-                    </StackPanel>
+                    <StackPanel VerticalAlignment="Bottom" DockPanel.Dock="Right" HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Grid Margin="10,0,10,0">
+                            <Border Background="Black" Opacity="0.2" CornerRadius="5"></Border>
 
-                </StackPanel>
+                            <Button BorderThickness="0" Height="30" Width="40" Background="Transparent"   FontWeight="Bold" Foreground="White" FontStyle="Normal" FontFamily="{DynamicResource IconFont}" Content="&#xe623;">
+                           
+                            </Button>
+                        </Grid>
+
+                        <Grid Margin="10,0,10,0">
+                            <Border Background="Black" Opacity="0.2" CornerRadius="5"></Border>
+                            <Button  BorderThickness="0" Height="30" Width="40" Background="Transparent"  FontWeight="Bold" Foreground="White" FontStyle="Normal" Content="···"></Button>
+                        </Grid>
+                        
+                    </StackPanel>
+                   
+
+
+                </DockPanel>
 
             </Grid>
+            <Grid Grid.Row="1" Name="main">
+                <StackPanel>
+                    <!--<ListBox BorderThickness="0" ItemsSource="{Binding MeumItem.TaskInfos}">
+                       
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                
+                                    <Grid Width="{Binding Width, ElementName=main}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" >
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Text" Value="✔"></Setter>
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver" Value="False">
+                                                            <Setter Property="Text" Value="⚪"></Setter>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="1" Text="{Binding Detail}"/>
+                                        <TextBlock Grid.Column="2" Text="☆"/>
+                                    </Grid>
+                                
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>-->
+                    <ItemsControl ItemsSource="{Binding MeumItem.TaskInfos}" Margin="10,15,0,0" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid MinHeight="36"  >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Name="taskicon" HorizontalAlignment="Center" Margin="0,0,10,0" FontSize="16" >
+                                        <TextBlock.InputBindings>
+                                            
+                                            <MouseBinding Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" MouseAction="LeftClick"></MouseBinding>
+                                        </TextBlock.InputBindings>
+                                        <TextBlock.Triggers>
+                                            <EventTrigger RoutedEvent="MouseDown">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation From="1.0" To="0.0" Duration="0:0:1" Storyboard.TargetName="taskicon" Storyboard.TargetProperty="Opacity">
+                                                        </DoubleAnimation>
+                                                        <DoubleAnimation From="1.0" To="0.0" Duration="0:0:1" Storyboard.TargetName="taskdetail" Storyboard.TargetProperty="Opacity">
+                                                        </DoubleAnimation>
+                                                        <DoubleAnimation From="1.0" To="0.0" Duration="0:0:1" Storyboard.TargetName="taskimportant" Storyboard.TargetProperty="Opacity">
+                                                        </DoubleAnimation>
+                                                    </Storyboard>
+                                                    
+                                                </BeginStoryboard>
+                                                
+                                            </EventTrigger>
+                                        </TextBlock.Triggers>
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Text" Value="✔"></Setter>
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="False">
+                                                        <Setter Property="Text" Value="⚪"></Setter>
+                                                    </Trigger>
+                                                    
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBlock Name="taskdetail" FontSize="16" Grid.Column="1" Text="{Binding Detail}"/>
+                                    <TextBlock Name="taskimportant" FontSize="16" Grid.Column="2" Text="☆"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Grid Margin="10,15,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Foreground="{Binding MeumItem.BackColor}" Margin="0,0,10,0" FontSize="16" Grid.Column="0" Text="{Binding IsFocused, ElementName=taskDetail,Converter={StaticResource addtaskIconConv}}" HorizontalAlignment="Center"></TextBlock>
+
+                        <DockPanel LastChildFill="False" Margin="0,0,10,0" Grid.Column="1">
+                            <TextBox MinWidth="100" DockPanel.Dock="Left" BorderThickness="0"  FontSize="16"  Name="taskDetail" Text="{Binding AddString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox.Resources>
+                                    <VisualBrush x:Key="hinttext" AlignmentX="Left" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <TextBlock FontSize="16" Foreground="{Binding MeumItem.BackColor}" Text="添加任务"></TextBlock>
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </TextBox.Resources>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Style.Triggers>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition  Property="IsMouseOver" Value="False"/>
+                                                    <Condition Property="Text" Value=""/>
+                                                </MultiTrigger.Conditions>
+
+                                                <Setter Property="Background" Value="{StaticResource hinttext}"></Setter>
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition  Property="IsFocused" Value="True"/>
+                                                    <Condition Property="Text" Value=""/>
+                                                </MultiTrigger.Conditions>
+
+                                                <Setter Property="Background" Value="{StaticResource hinttext}"></Setter>
+                                            </MultiTrigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                            <Button Command="{Binding SelectedCommand}" DockPanel.Dock="Right" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Content="×" Visibility="{Binding Text, ElementName=taskDetail, Converter={StaticResource addtaskconv}}"></Button>
+                        </DockPanel>
+                        
+                        
+                        <!--<TextBox BorderThickness="0" Margin="0,0,10,0" FontSize="16" Grid.Column="1" Name="taskDetail" Text="{Binding AddString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox.Resources>
+                                <VisualBrush x:Key="hinttext" AlignmentX="Left" Stretch="None">
+                                    <VisualBrush.Visual>
+                                        <TextBlock FontSize="16" Foreground="{Binding MeumItem.BackColor}" Text="添加任务"></TextBlock>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </TextBox.Resources>
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition  Property="IsMouseOver" Value="False"/>
+                                                <Condition Property="Text" Value=""/>
+                                            </MultiTrigger.Conditions> 
+                                           
+                                            <Setter Property="Background" Value="{StaticResource hinttext}"></Setter>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition  Property="IsFocused" Value="True"/>
+                                                <Condition Property="Text" Value=""/>
+                                            </MultiTrigger.Conditions>
+
+                                            <Setter Property="Background" Value="{StaticResource hinttext}"></Setter>
+                                        </MultiTrigger>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>-->
+                        <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Command="{Binding AddTaskCommand}" Foreground="{Binding MeumItem.BackColor}" Margin="0,0,10,0" FontSize="16" Grid.Column="2" Content="添加" Visibility="{Binding Text, ElementName=taskDetail,Converter={StaticResource addtaskconv}}"></Button>
+                    </Grid>
+                    
+                </StackPanel>
+
+
+            </Grid>
+
+
         </Grid>
     </Grid>
 </Window>

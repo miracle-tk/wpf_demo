@@ -26,6 +26,7 @@ namespace MircoSoftToDoDemo
             InitializeComponent();
             this.MouseDown += delegate { DragMove(); };
             this.DataContext = new MainWindowViewModel();
+
         }
 
       
