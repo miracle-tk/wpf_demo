@@ -27,5 +27,31 @@ namespace MircoSoftToDoDemo
             this.MouseDown += delegate { DragMove(); };
             this.DataContext = new MainWindowViewModel();
         }
+
+      
+        private void Min_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void Max_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.WindowState== WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+                max.Content = "☐";
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+                max.Content = "吕";
+            }
+           
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

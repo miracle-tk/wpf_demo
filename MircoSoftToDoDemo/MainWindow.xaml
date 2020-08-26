@@ -4,12 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MircoSoftToDoDemo"
+        xmlns:cv="clr-namespace:MircoSoftToDoDemo.Converters"
         mc:Ignorable="d"
         Title="MainWindow"  Height="600" Width="1000" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
           ResizeMode="CanResizeWithGrip">
     <Window.Resources>
-       
-        
         <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
             <Setter Property="FocusVisualStyle">
                 <Setter.Value>
@@ -80,7 +79,6 @@
             <Setter Property="MinHeight" Value="44"></Setter>
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
         </Style>
-
         <DataTemplate x:Key="menulist">
             <RadioButton   BorderThickness="0" HorizontalContentAlignment="Left"  Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
                 
@@ -90,9 +88,8 @@
                 </StackPanel>
             </RadioButton>
         </DataTemplate>
-
-        
-
+        <cv:DisplayToVisibility x:Key="displayToVis"></cv:DisplayToVisibility>
+        <cv:DateConverter x:Key="dateconverter"></cv:DateConverter>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -126,34 +123,39 @@
                     </Style>
                 </ListBox.ItemContainerStyle>
             </ListBox>
-           
+       </StackPanel>
 
-
-
-        </StackPanel>
-
-        <Grid Grid.Column="1" Background="{Binding MeumItem.BackColor}">
+        <Grid Grid.Column="1" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="160"></RowDefinition>
+                
                 <RowDefinition/>
                 <RowDefinition Height="90"></RowDefinition>
 
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button MinWidth="40" BorderThickness="0" Background="Transparent" Foreground="White">一</Button>
-                <Button  MinWidth="40" BorderThickness="0" Background="Transparent" Foreground="White">☐</Button>
-                <Button  MinWidth="40" BorderThickness="0" Background="Transparent" Foreground="White">✕</Button>
-            </StackPanel>
-            <StackPanel Grid.Row="1">
-                <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
-                    <TextBlock Visibility="{Binding MeumItem.}" Foreground="White" VerticalAlignment="Center" FontSize="40" FontFamily="{DynamicResource IconFont}" Text="{Binding MeumItem.Icon}"></TextBlock>
-                    <TextBlock Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="30" FontFamily="{DynamicResource IconFont}" Text="{Binding MeumItem.Menu}"></TextBlock>
-                        
+            <Grid Background="{Binding MeumItem.BackColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="130"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="min" MinWidth="40" BorderThickness="0" Background="Transparent" Foreground="White" Click="Min_Click">一</Button>
+                    <Button Name="max" MinWidth="40" BorderThickness="0" Background="Transparent" Foreground="White" Click="Max_Click" >☐</Button>
+                    <Button Name="close" MinWidth="40" BorderThickness="0" Background="Transparent" Foreground="White" Click="Close_Click">✕</Button>
                 </StackPanel>
-            </StackPanel>
-            
-            
+                <StackPanel VerticalAlignment="Bottom" Grid.Row="1">
+                    <StackPanel  Orientation="Horizontal" Margin="30,0,0,0">
+                        <TextBlock Name="ico" Visibility="{Binding MeumItem.Display, Converter={StaticResource displayToVis} }" Foreground="White" VerticalAlignment="Center" FontSize="40" FontFamily="{DynamicResource IconFont}" Text="{Binding MeumItem.Icon}"></TextBlock>
+                        <TextBlock Name="title" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="30" FontFamily="{DynamicResource IconFont}" Text="{Binding MeumItem.Menu}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="35,0,0,0">
+                        <TextBlock Visibility="{Binding Visibility,ElementName=ico}" Foreground="White" VerticalAlignment="Center" FontSize="20" Text="{Binding Text, ElementName=title, Converter={StaticResource dateconverter}}"></TextBlock>
+                    </StackPanel>
+
+                </StackPanel>
+
+            </Grid>
         </Grid>
     </Grid>
 </Window>

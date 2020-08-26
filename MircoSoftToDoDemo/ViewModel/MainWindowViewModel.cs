@@ -32,7 +32,7 @@ namespace MircoSoftToDoDemo.ViewModel
             if (_meums == null)
             {
                 _meums = new ObservableCollection<MeumModel>();
-                _meums.Add(new MeumModel() { Icon = "\xe662", Menu = "我的一天" ,BackColor="Green",Display=false});
+                _meums.Add(new MeumModel() { Icon = "\xe623", Menu = "我的一天" ,BackColor="Green",Display=false});
                 _meums.Add(new MeumModel() { Icon = "\xe662", Menu = "重要", BackColor = "Red" });
                 _meums.Add(new MeumModel() { Icon = "\xe662", Menu = "已计划日程", BackColor = "#218868" });
                 _meums.Add(new MeumModel() { Icon = "\xe662", Menu = "任务", BackColor = "Blue" });
