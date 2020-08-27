@@ -196,55 +196,90 @@
             </Grid>
             <Grid Grid.Row="1" Name="main">
                 <StackPanel>
-                    <!--<ListBox BorderThickness="0" ItemsSource="{Binding MeumItem.TaskInfos}">
-                       
+                    <ListBox BorderThickness="0" ItemsSource="{Binding MeumItem.TaskInfos}" SelectedItem="{Binding TaskItem}" Margin="10,15,0,0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <Grid MinHeight="36">
+                                                <Border Name="border"/>
+                                                <ContentPresenter/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                
-                                    <Grid Width="{Binding Width, ElementName=main}">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="50"/>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition Width="50"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" >
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Text" Value="✔"></Setter>
-                                                        </Trigger>
-                                                        <Trigger Property="IsMouseOver" Value="False">
-                                                            <Setter Property="Text" Value="⚪"></Setter>
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                        <TextBlock Grid.Column="1" Text="{Binding Detail}"/>
-                                        <TextBlock Grid.Column="2" Text="☆"/>
-                                    </Grid>
-                                
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Name="taskicon"  Margin="0,0,10,0" FontSize="16"  >
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"  MouseAction="LeftClick"></MouseBinding>
+                                        </TextBlock.InputBindings>
+                                        <TextBlock.Triggers>
+                                            <EventTrigger RoutedEvent="MouseDown">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation From="1.0" To="0.0" Duration="0:0:1" Storyboard.TargetName="taskicon" Storyboard.TargetProperty="Opacity">
+                                                        </DoubleAnimation>
+                                                        <DoubleAnimation From="1.0" To="0.0" Duration="0:0:1" Storyboard.TargetName="taskdetail" Storyboard.TargetProperty="Opacity">
+                                                        </DoubleAnimation>
+                                                        <DoubleAnimation From="1.0" To="0.0" Duration="0:0:1" Storyboard.TargetName="taskimportant" Storyboard.TargetProperty="Opacity">
+                                                        </DoubleAnimation>
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+                                            </EventTrigger>
+                                        </TextBlock.Triggers>
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Text" Value="✔"></Setter>
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="False">
+                                                        <Setter Property="Text" Value="⚪"></Setter>
+                                                    </Trigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBlock Name="taskdetail" FontSize="16" Grid.Column="1" Text="{Binding Detail}"/>
+                                    <TextBlock Name="taskimportant" FontSize="16" Grid.Column="2" Text="☆"/>
+                                </Grid>
+
 
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-                    </ListBox>-->
-                    <ItemsControl ItemsSource="{Binding MeumItem.TaskInfos}" Margin="10,15,0,0" >
+                    </ListBox>
+                    <!--<ItemsControl ItemsSource="{Binding MeumItem.TaskInfos}" Margin="10,15,0,0"  >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
 
-                        <ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemTemplate >
                             <DataTemplate>
-                                <Grid MinHeight="36"  >
+                                <Grid MinHeight="36"   >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50"/>
                                         <ColumnDefinition />
                                         <ColumnDefinition Width="50"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Name="taskicon" HorizontalAlignment="Center" Margin="0,0,10,0" FontSize="16" >
+                                    <TextBlock Grid.Column="0" Name="taskicon" HorizontalAlignment="Center" Margin="0,0,10,0" FontSize="16"  >
                                         <TextBlock.InputBindings>
                                             
                                             <MouseBinding Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" MouseAction="LeftClick"></MouseBinding>
@@ -284,7 +319,7 @@
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    </ItemsControl>-->
                     <Grid Margin="10,15,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>

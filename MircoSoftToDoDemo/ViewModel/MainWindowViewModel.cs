@@ -78,6 +78,7 @@ namespace MircoSoftToDoDemo.ViewModel
         {
            int index =  Meums.IndexOf(MeumItem);
             Meums[index].TaskInfos.Remove(ti);
+           // TaskItem = null;
         }
 
         private void AddTask()
