@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using MircoSoftToDoDemo.Models;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -25,11 +26,18 @@ namespace MircoSoftToDoDemo.ViewModel
             get { return _taskitem; }
             set { SetProperty(ref _taskitem, value); }
         }
+        private Visibility _expandVisibility=Visibility.Collapsed;
+
+        public Visibility ExpandVisibility
+        {
+            get { return _expandVisibility; }
+            set { SetProperty(ref _expandVisibility, value); ; }
+        }
 
         public DelegateCommand SelectedCommand { get; set; }
         public DelegateCommand AddTaskCommand { get; set; }
         public DelegateCommand<TaskInfo> DeleteTaskCommand { get; set; }
-
+        public DelegateCommand ClickTask { get; set; }
         private ObservableCollection<MeumModel> _meums;
 
         public ObservableCollection<MeumModel> Meums
@@ -71,7 +79,13 @@ namespace MircoSoftToDoDemo.ViewModel
             {
                 AddTaskCommand = new DelegateCommand(AddTask);
                 DeleteTaskCommand = new DelegateCommand<TaskInfo>(DeleteTask);
+                ClickTask = new DelegateCommand(clicktask);
             }
+        }
+
+        private void clicktask()
+        {
+            ExpandVisibility = Visibility.Visible;
         }
 
         private void DeleteTask(TaskInfo ti)
