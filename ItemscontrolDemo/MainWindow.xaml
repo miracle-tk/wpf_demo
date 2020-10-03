@@ -1,0 +1,26 @@
+﻿<Window x:Class="ItemscontrolDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ItemscontrolDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" KeyUp="Window_KeyUp">
+    <Grid>
+        <ListBox Name="lb" />
+        <ItemsControl ItemsSource="{Binding Data}">
+           
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding Col}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <!--<local:UserControl1 Input="{Binding num}"/>-->
+                    <ContentControl Content="{Binding content}"></ContentControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Window>

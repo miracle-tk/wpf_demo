@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ItemscontrolDemo.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace test1
+namespace ItemscontrolDemo
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -23,9 +24,18 @@ namespace test1
         public MainWindow()
         {
             InitializeComponent();
-            var w =new Window1();
+            this.DataContext = new MainWindowViewModel();
+            lb.SelectionChanged += Lb_SelectionChanged;
+        }
+
+        private void Lb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
             
-            w.Show();
         }
     }
 }

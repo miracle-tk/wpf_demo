@@ -9,11 +9,12 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace test1
+namespace Expender
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -23,9 +24,7 @@ namespace test1
         public MainWindow()
         {
             InitializeComponent();
-            var w =new Window1();
-            
-            w.Show();
+              
         }
     }
 }
