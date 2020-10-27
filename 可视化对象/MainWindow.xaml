@@ -1,0 +1,38 @@
+﻿<Window x:Class="可视化对象.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:可视化对象"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+
+
+
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="auto" ></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ToolBar Name="toolbar" >
+            <StackPanel >
+                <RadioButton  Name="cmdSelectMove" VerticalContentAlignment="Center">
+                    <TextBlock Margin="10,0,0,0" Text="select/move"  HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </RadioButton>
+                <RadioButton Name="cmdAdd" VerticalContentAlignment="Center">
+                    <TextBlock Margin="10,0,0,0" Text="add"  HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+
+                </RadioButton>
+                <RadioButton Name="cmdDelete" VerticalContentAlignment="Center">
+                    <TextBlock Margin="10,0,0,0" Text="delete"  HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </RadioButton>
+                <RadioButton Name="cmdSelectMultiple" VerticalContentAlignment="Center">
+                    <TextBlock Margin="10,0,0,0" Text="SelectMultiple"  HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    </RadioButton>
+            </StackPanel>
+        </ToolBar>
+        <local:DrawingCanvas Background="White" Grid.Column="1" x:Name="drawingSurface" ClipToBounds="True" MouseMove="DrawingSurface_MouseMove" MouseLeftButtonUp="DrawingSurface_MouseLeftButtonUp"   MouseLeftButtonDown="DrawingSurface_MouseLeftButtonDown"></local:DrawingCanvas>
+    </Grid>
+</Window>

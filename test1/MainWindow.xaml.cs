@@ -25,7 +25,7 @@ namespace test1
             InitializeComponent();
             var w =new Window1();
             
-            w.Show();
+            
         }
     }
 }
