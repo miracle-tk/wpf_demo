@@ -13,5 +13,6 @@
     </Window.Resources>
     <Grid>
         <Button Width="100" Height="100" Effect="{StaticResource shadoweffect}"></Button>
+        <TextBox Name="searchBox" Text="123"/>
     </Grid>
 </Window>
