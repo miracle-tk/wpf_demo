@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:动画基础"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Name="mainWindow" Background="Blue" SizeChanged="MainWindow_SizeChanged">
+    <Window.Triggers>
+        <EventTrigger SourceName="start" RoutedEvent="Button.Click">
+            <BeginStoryboard Name="beginstoryboard">
+                <Storyboard >
+                    <DoubleAnimation Storyboard.TargetName="mainWindow" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:10"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger SourceName="pause" RoutedEvent="Button.Click">
+            <PauseStoryboard BeginStoryboardName="beginstoryboard"/>
+        </EventTrigger>
+        <EventTrigger SourceName="stop" RoutedEvent="Button.Click">
+            <StopStoryboard BeginStoryboardName="beginstoryboard"/>
+        </EventTrigger>
+        <EventTrigger SourceName="resume" RoutedEvent="Button.Click">
+            <ResumeStoryboard BeginStoryboardName="beginstoryboard"/>
+        </EventTrigger>
+        <EventTrigger SourceName="middle" RoutedEvent="Button.Click">
+            <SeekStoryboard BeginStoryboardName="beginstoryboard" Offset="0:0:5"/>
+        </EventTrigger>
+    </Window.Triggers>
     <Grid>
-        
+        <StackPanel>
+            <Button Name="cmdGrow" Content="click to grow" Width="100"  Click="CmdGrow_Click"/>
+            <Button Name="changewidth" Content="click to change width" Click="Changewidth_Click"/>
+            <Button Content="同步的动画" Width="100" Height="40">
+                <Button.Triggers>
+                    <EventTrigger  RoutedEvent="Button.Click">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard >
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetProperty="Width" To="110" Duration="0:0:1">
+                                        <DoubleAnimation.EasingFunction>
+                                            <ElasticEase EasingMode="EaseOut" Oscillations="10"/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                    <DoubleAnimation Storyboard.TargetProperty="Height" To="200" Duration="0:0:1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="start" Name="start"/>
+                <Button Content="stop" Name="stop"/>
+                <Button Content="resume" Name="resume"/>
+                <Button Content="pause" Name="pause"/>
+                <Button Content="Move to Middle" Name="middle"/>
+            </StackPanel>
+        </StackPanel>
+        <Canvas>
+            
+        </Canvas>
     </Grid>
 </Window>

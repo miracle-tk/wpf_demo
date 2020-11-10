@@ -22,6 +22,7 @@ namespace 依赖属性
         public Window1()
         {
             InitializeComponent();
+            
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetSDKCS.Control;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,39 @@ namespace test1
         public MainWindow()
         {
             InitializeComponent();
-            var w =new Window1();
-            
-            
+          // processBar1
+            // var w =new Window1();
+            processBar1.Enabled = true;
+            processBar1.Clear();
+            Loaded += MainWindow_Loaded;
+
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+              DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day-5, 0, 0, 0);
+            VideoTime[] videoTimeArray = new VideoTime[1];
+            for (int i = 0; i < 1; i++)
+            {
+                var date = startTime;
+              //  date.AddDays(1);
+                var end = date;
+                end.AddHours(5);
+                videoTimeArray[i] = new VideoTime();
+                videoTimeArray[i].StartTime = date;
+                videoTimeArray[i].EndTime = end;
+            }
+            processBar1.Init(startTime, videoTimeArray);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+          
+        }
+
+        private void ProcessBar1_ProgressChanged(object sender, ProgressEventargs args)
+        {
+
         }
     }
 }
