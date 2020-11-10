@@ -80,6 +80,7 @@
         </ItemsControl>
         <StackPanel Width="100" Height="100">
             <Button  Style="{DynamicResource ButtonStyle1}">3434343</Button>
+            
          </StackPanel>
 
     </Grid>
