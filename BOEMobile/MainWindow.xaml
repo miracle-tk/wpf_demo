@@ -24,9 +24,9 @@
             </Grid.ColumnDefinitions>
             <Border>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBox Name="tb_search" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource SearchBoxStyle }"  Width="200" ></TextBox>
-                    <Button Style="{StaticResource ControlButtonStyle}" Content="&#xe626;" />
-                </StackPanel>
+                    <TextBox Name="tb_search" Margin="10,0,0,0"  Style="{StaticResource SearchBoxStyle }" Width="200" ></TextBox>
+                    <Button  Style="{StaticResource ControlButtonStyle}" Content="&#xe626;" />
+                 </StackPanel>
             </Border>
             <Border Grid.Column="1" BorderBrush="#DCE0E5" Background="#EDF0F2" BorderThickness="2"/>
             <StackPanel  Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
@@ -35,6 +35,8 @@
                 <Button  Content="&#xe66b;" Style="{StaticResource ControlButtonStyle}"/>
                 <Button  Content="&#xe607;" Style="{StaticResource ControlButtonStyle}"/>
             </StackPanel>
+           
+
         </Grid>
 
 
