@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="自制控件.Instrument"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:自制控件"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:converter="clr-namespace:自制控件.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded" SizeChanged="UserControl_SizeChanged">
+    <UserControl.Resources>
+        <converter:HalfSizeConverter x:Key="halfSizeConverter"/>
+
+    </UserControl.Resources>
+    <Grid>
+        
+        <Canvas  Name="outCanvas">
+            <Path Stroke="Yellow" Fill="Yellow" VerticalAlignment="Center"  HorizontalAlignment="Center">
+                <Path.Data>
+                    <EllipseGeometry  x:Name="ellipse" RadiusX="100" RadiusY="100">
+
+                    </EllipseGeometry>
+                </Path.Data>
+            </Path>
+
+
+
+            <Canvas Name="mainCanvas"/>
+            <Path Stroke="White" StrokeThickness="4"  Name="arcPath" StrokeStartLineCap="Round"/>
+            <Path  Name="pointer" Stroke="Purple" Fill="Purple" RenderTransformOrigin="0,0" StrokeThickness="0.5">
+                <Path.RenderTransform>
+                    <RotateTransform Angle="0" x:Name="pointerAngle"/>
+                </Path.RenderTransform>
+            </Path>
+        </Canvas>
+        
+        <Ellipse Name="centerCircle" Fill="White" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+       
+    </Grid>
+</UserControl>

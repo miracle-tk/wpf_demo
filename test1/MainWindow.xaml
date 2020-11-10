@@ -3,16 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf ="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" 
+         xmlns:wfi ="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
         xmlns:local="clr-namespace:test1"
         mc:Ignorable="d"
+        xmlns:controls="clr-namespace:NetSDKCS.Control;assembly=NetSDKCSControl"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <DropShadowEffect x:Key="shadoweffect" Opacity="0.5" Color="Red" BlurRadius="50" Direction="315"> 
-            
+        <DropShadowEffect x:Key="shadoweffect" Opacity="0.5" Color="Red" BlurRadius="50" Direction="315">
+
         </DropShadowEffect>
     </Window.Resources>
     <Grid>
-        <Button Width="100" Height="100" Effect="{StaticResource shadoweffect}"></Button>
-        <TextBox Name="searchBox" Text="123"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <!--<Button Margin="0,0,0,100"  Name="hiddenButton" Width="100" Height="100" Effect="{StaticResource shadoweffect}"></Button>
+            <Button Content="show" Click="Button_Click"/>-->
+            <wfi:WindowsFormsHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                
+                <controls:PlayBackProgressBar x:Name="processBar1" ProgressChanged="ProcessBar1_ProgressChanged" />
+            </wfi:WindowsFormsHost>
+        </StackPanel>
     </Grid>
 </Window>
