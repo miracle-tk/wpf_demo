@@ -24,7 +24,7 @@ namespace Binding_demo
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel("hah");
+         //   this.DataContext = new MainWindowViewModel("hah");
         }
     }
 }

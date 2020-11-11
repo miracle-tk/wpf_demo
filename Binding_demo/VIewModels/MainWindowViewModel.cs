@@ -44,6 +44,17 @@ namespace Binding_demo.VIewModels
         //    Test = "name";
         //    Change = new DelegateCommand(change);
         //}
+        public MainWindowViewModel()
+        {
+            Test = "hahaaaa";
+            Change = new DelegateCommand(change);
+
+            Colors.Add(new Color { Code = "#1111" });
+            Colors.Add(new Color { Code = "#2222" });
+            Colors.Add(new Color { Code = "#3333" });
+            Colors.Add(new Color { Code = "#4444" });
+
+        }
         public MainWindowViewModel(string s)
         {
             Test = s;

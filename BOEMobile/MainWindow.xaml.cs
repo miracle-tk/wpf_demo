@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBOEMobile.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace MyBOEMobile
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
         }
     }
 }
