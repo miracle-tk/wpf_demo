@@ -20,7 +20,7 @@
             <ColumnDefinition Width="70" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Border Background="{StaticResource ThemeColorStyle}"/>
+        <Border Background="{StaticResource ThemeColorStyle}" MouseLeftButtonDown="Border_MouseLeftButtonDown"/>
         <Border Background="{StaticResource ThemeColorStyle}" Grid.Row="2"/>
         <TextBlock Margin="0,20,0,0"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Foreground="Blue" FontFamily="/Fonts/#iconfont" Text="&#xe662;"/>
         <!--右上部分-->
@@ -31,7 +31,7 @@
             </Grid.ColumnDefinitions>
             <Border>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBox Name="tb_search" Margin="10,0,0,0"  Style="{StaticResource SearchBoxStyle }" Width="200" ></TextBox>
+                    <TextBox Name="tb_search" Margin="30,0,0,0"  Style="{StaticResource SearchBoxStyle }" Width="200" ></TextBox>
                     <Button  Style="{StaticResource ControlButtonStyle}" Content="&#xe626;" />
                  </StackPanel>
             </Border>
@@ -46,30 +46,10 @@
 
         </Grid>
         <!--左侧选项栏-->
-        <ListBox ItemsPanel="{Binding WorkTabs}" Grid.Row="1" Background="Transparent" BorderBrush="Transparent">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <Grid>
-                                    <Border Name="border"/>
-                                    <ContentPresenter/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
-                <DataTemplate >
-                    <RadioButton>
-                        <TextBlock FontFamily="/Fonts/#iconfont" Text="{Binding Text}"/>
-                    </RadioButton>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+        <ListBox Margin="0,15,0,0" SelectedItem="{Binding SelectWorkTab}" ItemsSource="{Binding WorkTabs}" Style="{StaticResource LeftListBoxStyle}" Grid.Row="1" Background="Transparent" BorderBrush="Transparent">
+            
         </ListBox>
-
+        <ContentControl  Content="{Binding SelectWorkTab.Content}" Grid.Row="1" Grid.Column="1"/>
 
 
     </Grid>

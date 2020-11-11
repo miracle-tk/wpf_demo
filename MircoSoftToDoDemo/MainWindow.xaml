@@ -142,6 +142,7 @@
                                 <TextBlock  Margin="10,0,0,0" FontSize="14" Text="{Binding Menu}" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </RadioButton>
+                       
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

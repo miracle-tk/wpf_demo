@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using MyBOEMobile.View;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,22 @@ namespace MyBOEMobile.ViewModel
             set {SetProperty(ref _workTabs , value); }
         }
 
+        private WorkTab _selectWorkTab;
+
+        public WorkTab SelectWorkTab
+        {
+            get { return _selectWorkTab; }
+            set { SetProperty(ref  _selectWorkTab , value); }
+        }
+
         public MainWindowViewModel()
         {
             _workTabs = new List<WorkTab>()
             {
-                new WorkTab{Text="&#xe621;",Content=null},
-                new WorkTab{Text="&#xe621;",Content=null}
+                new WorkTab{Text="\xe62f",Content=new ChatView()},
+                new WorkTab{Text="\xe667",Content=null},
+                new WorkTab{Text="\xe60a",Content=null},
+                new WorkTab{Text="\xe63e",Content=null}
             };
         }
     }

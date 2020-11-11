@@ -4,26 +4,29 @@
 
 
     <Style TargetType="RadioButton" x:Key="ListBoxRadioStyle">
+        <Setter Property="Foreground" Value="Gray"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Grid Background="Transparent">
 
-                        <Border Name="border" Background="Yellow"/>
+                        <Border Name="border" />
                         <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}"
                                               Content="{TemplateBinding Content}" Grid.Column="1" 
                                               ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" 
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                               Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="Red"/>
-                        </Trigger>
+                        
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#CED5DB"/>
+                         
+                            <Setter Property="Foreground" Value="Blue"/>
                         </Trigger>
+                       
+                       
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -37,21 +40,26 @@
                     <Border Name="border">
                         <ContentPresenter/>
                     </Border>
-                    <!--<ControlTemplate.Triggers>
+                    <ControlTemplate.Triggers>
+                       
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="Red"/>
+                            <Setter Property="Background" TargetName="border" Value="#CED5DB"/>
+                            
                         </Trigger>
-                        
-                    </ControlTemplate.Triggers>-->
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
     
     <DataTemplate x:Key="LeftListBoxItemTemplateStyle">
-        <RadioButton Background="Red">
-          
-            <TextBlock MinHeight="20" Background="Yellow" FontFamily="/Fonts/#iconfont" Text="{Binding DataContext.Text, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+        <RadioButton MinHeight="60" Margin="0,5,0,0" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Style="{StaticResource ListBoxRadioStyle}" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontFamily="/Fonts/#iconfont" Text="{Binding Text}"/>
+                <Border Margin="-10,0,0,0" Background="Red" CornerRadius="2" Width="18" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <TextBlock Foreground="White" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+            </StackPanel>
         </RadioButton>
     </DataTemplate>
     
