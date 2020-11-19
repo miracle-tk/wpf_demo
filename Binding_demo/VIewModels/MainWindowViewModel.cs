@@ -11,6 +11,7 @@ namespace Binding_demo.VIewModels
 {
     class MainWindowViewModel: BindableBase
     {
+        public DelegateCommand LoadCommand;
         private List<Color> colors ;
 
         public List<Color> Colors
@@ -46,6 +47,13 @@ namespace Binding_demo.VIewModels
         //}
         public MainWindowViewModel()
         {
+            LoadCommand = new DelegateCommand(Load);
+            
+
+        }
+
+        public void Load()
+        {
             Test = "hahaaaa";
             Change = new DelegateCommand(change);
 
@@ -53,17 +61,18 @@ namespace Binding_demo.VIewModels
             Colors.Add(new Color { Code = "#2222" });
             Colors.Add(new Color { Code = "#3333" });
             Colors.Add(new Color { Code = "#4444" });
-
         }
+
         public MainWindowViewModel(string s)
         {
-            Test = s;
-            Change = new DelegateCommand(change);
+            LoadCommand = new DelegateCommand(Load);
+            //Test = s;
+            //Change = new DelegateCommand(change);
            
-            Colors.Add(new Color { Code = "#1111" });
-            Colors.Add(new Color { Code = "#2222" });
-            Colors.Add(new Color { Code = "#3333" });
-            Colors.Add(new Color { Code = "#4444" });
+            //Colors.Add(new Color { Code = "#1111" });
+            //Colors.Add(new Color { Code = "#2222" });
+            //Colors.Add(new Color { Code = "#3333" });
+            //Colors.Add(new Color { Code = "#4444" });
             
         }
         private void change()

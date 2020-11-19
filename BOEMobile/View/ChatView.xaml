@@ -3,29 +3,199 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converter="clr-namespace:MyBOEMobile.Converters"
              xmlns:local="clr-namespace:MyBOEMobile.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" >
+    <UserControl.Resources>
+        <converter:OnlineConverter x:Key="OnlineConverter"/>
+        <converter:ChatVisibilityConverter x:Key="ChatVisibilityConverter"/>
+        <converter:ChatDirectionConverter x:Key="directionConverter"/>
+        <converter:ChatColorConverter x:Key="colorConverter"/>
+        <converter:ChatImageConverter x:Key="imageConverter"/>
+        <ControlTemplate TargetType="Button" x:Key="chatButton">
+            <Grid>
+                <Border>
+                    <ContentPresenter/>
+                </Border>
+            </Grid>
+
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.6"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition />
+            <ColumnDefinition MinWidth="240"/>
+            <ColumnDefinition MinWidth="480"/>
         </Grid.ColumnDefinitions>
-        <Border BorderThickness="0,0,1,0" BorderBrush="DarkGray"/>
-        <!--联系人列表-->
-        <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <!--搜索框-->
+        <Border Background="White">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <TextBox  Grid.Column="0" Height="30" Name="tb_search" Margin="10,0,0,0"  Style="{StaticResource SearchBoxStyle }" MinWidth="200" ></TextBox>
+                <Button Grid.Column="1" Style="{StaticResource ControlButtonStyle}" Margin="-10,0,0,0" Content="&#xe626;" />
+            </Grid>
+            
+               
+            
+        </Border>
+        <GridSplitter Panel.ZIndex="10" Width="3" Grid.RowSpan="2" BorderBrush="Red" BorderThickness="0,0,0,0">
+            <GridSplitter.Style>
+                <Style TargetType="GridSplitter">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="#AAB9BA"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </GridSplitter.Style>
+        </GridSplitter>
+       <!--左侧列表-->
+        <Grid Grid.Column="0" Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition  />
             </Grid.RowDefinitions>
-            
-            <Border Background="LightGray">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <TextBlock Margin="20,5,5,0" FontFamily="../Fonts/#iconfont" FontSize="20" Text="&#xe657;" Foreground="DimGray" VerticalAlignment="Center"/>
-                    <TextBlock Text="待处理消息0条" FontSize="15"  Foreground="DimGray" VerticalAlignment="Center"/>
-                    <TextBlock Margin="80,0,0,5" HorizontalAlignment="Right"  FontSize="25" Text="＞" Foreground="DimGray" VerticalAlignment="Center"/>
-                </StackPanel>
+
+            <!--<Border Background="#EDF0F2">-->
+            <!--待做事项-->
+            <Border Background="#EDF0F2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                        
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                        <TextBlock HorizontalAlignment="Left" Margin="20,5,5,0" FontFamily="../Fonts/#iconfont" FontSize="20" Text="&#xe657;" Foreground="DimGray" VerticalAlignment="Center"/>
+                        <TextBlock HorizontalAlignment="Center" Text="待处理消息0条" FontSize="15"  Foreground="DimGray" VerticalAlignment="Center"/>
+                     </StackPanel>
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,0,5"   FontSize="25" Text="＞" Foreground="DimGray" VerticalAlignment="Center"/>
+
+                </Grid>
+               
             </Border>
+            <!--联系人列表-->
+            <ListBox Grid.Row="1" BorderThickness="0"  SelectedItem="{Binding SelectedContactPerson,Mode=TwoWay}" ScrollViewer.CanContentScroll="False" ItemsSource="{Binding ContactInfos}" Style="{StaticResource ContactListBoxStyle}"/>
+          
         </Grid>
+        <!--右侧对话-->
+        <Grid Grid.Column="1" Visibility="{Binding SelectedContactPerson,Converter={StaticResource ChatVisibilityConverter},Mode=OneWay}">
+            <!--上放姓名状态岗位信息-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <StackPanel Margin="10,0,0,0" Grid.Column="0" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,5" >
+                    <TextBlock Cursor="Hand" VerticalAlignment="Center"  HorizontalAlignment="Center" FontSize="15"  Text="{Binding SelectedContactPerson.Name}"/>
+                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Padding="0,5,0,0" FontFamily="/Fonts/#iconfont" Text="{Binding SelectedContactPerson.IsOnline,Converter={StaticResource OnlineConverter}}" Foreground="#48ACF4" FontSize="17" FontWeight="Bold"/>
+                    <TextBlock VerticalAlignment="Center" Margin="10,2,0,0" Text="{Binding SelectedContactPerson.PersonalSignature}" Opacity="0.6"/>
+                </StackPanel>
+                <TextBlock Text="{Binding SelectedContactPerson.WorkStation}" Opacity="0.6"/>
+            </StackPanel>
+        </Grid>
+        <!--对话框-->
+        <Grid Background="#EDEFF1" Grid.Row="1" Grid.Column="1" Visibility="{Binding SelectedContactPerson,Converter={StaticResource ChatVisibilityConverter},Mode=OneWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="160"/>
+            </Grid.RowDefinitions>
+            <!--聊天信息-->
+            <Border BorderThickness="0,0,0,2" BorderBrush="#E6E6E6" >
+                <ListBox Background="Transparent" ItemsSource="{Binding SelectedContactPerson.MessageList}">
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="ItemContainerStyle">
+                                <Setter.Value>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="Focusable" Value="False"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+
+                                                    <StackPanel  Orientation="Horizontal"  HorizontalAlignment="Stretch" VerticalAlignment="Top" FlowDirection="{Binding IsMe,Converter={StaticResource directionConverter}}" Margin="15,5">
+                                                        <Border  Height="35" Width="35" CornerRadius="5">
+                                                            <Border.Background>
+                                                                <ImageBrush ImageSource="{Binding DataContext.ToUserImagePath,RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                                                            </Border.Background>
+                                                        </Border>    
+                                                        <!--<Image  Source=Grid.Column="1"  Height="35" Width="35" VerticalAlignment="Top">
+                                                            
+                                                        </Image>-->
+                                                        <Path  StrokeThickness="1" Stroke="{Binding IsMe,Converter={StaticResource colorConverter}}" Data="M12,13 L5,18 L12,23Z" Fill="{Binding IsMe,Converter={StaticResource colorConverter}}" Margin="0" SnapsToDevicePixels="True"/>
+                                                        <Border CornerRadius="3">
+                                                            <TextBox  VerticalContentAlignment="Center" Padding="5,0"  MaxWidth="355" TextWrapping="Wrap" FontSize="15" BorderBrush="{Binding IsMe,Converter={StaticResource colorConverter}}" Background="{Binding IsMe,Converter={StaticResource colorConverter}}" IsReadOnly="True" BorderThickness="0"  FlowDirection="LeftToRight" Text="{Binding Message}">
+                                                                <TextBox.Style>
+                                                                    <Style TargetType="TextBox">
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate>
+                                                                                    <Border CornerRadius="10"  Background="{TemplateBinding Background}">
+                                                                                        <ScrollViewer  x:Name="PART_ContentHost" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Padding="{TemplateBinding Padding}" Focusable="false">
+                                                                                        </ScrollViewer>
+                                                                                    </Border>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </Style>
+                                                                </TextBox.Style>
+                                                            </TextBox>
+                                                        </Border>
+                                                    </StackPanel>
+                                                    
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Setter.Value>
+                            </Setter>
+                        
+                        </Style>
+                    </ListBox.Style>
+                </ListBox>
+                
+            </Border>
+            <!--输入框-->
+            <Grid Grid.Row="1" MinHeight="100">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="10,0,0,0">
+                    <Button Margin="0,5,0,0"  Template="{StaticResource chatButton}"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Foreground="#89939A" Content="&#xe666;" FontFamily="/Fonts/#iconfont"/>
+                    <Button Margin="15,5,0,0" Template="{StaticResource chatButton}"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Foreground="#89939A" Content="&#xe70f;" FontFamily="/Fonts/#iconfont"/>
+                    <Button Margin="15,5,0,0" Template="{StaticResource chatButton}"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Foreground="#89939A" Content="&#xe613;" FontFamily="/Fonts/#iconfont"/>
+                    <Button Margin="-5,5,0,0" Template="{StaticResource chatButton}"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Foreground="#89939A" Content="&#xe62e;" FontFamily="/Fonts/#iconfont"/>
+                    <Button Margin="15,5,0,0" Template="{StaticResource chatButton}"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Foreground="#89939A" Content="&#xe6b9;" FontFamily="/Fonts/#iconfont"/>
+                </StackPanel>
+                <Grid Grid.Row="1" Margin="0,0,20,20" Background="Yellow" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer  Grid.Row="0" VerticalScrollBarVisibility="Auto" FocusManager.FocusedElement="{Binding ElementName=rtb}">
+                        <TextBox  Name="rtb" BorderThickness="0"/>
+                    </ScrollViewer>
+
+                </Grid>
+
+            </Grid>
+        </Grid>
+    
     </Grid>
 </UserControl>

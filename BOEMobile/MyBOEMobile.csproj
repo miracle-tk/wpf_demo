@@ -65,10 +65,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Control\ChatControl.xaml.cs">
+      <DependentUpon>ChatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ChatColorConverter.cs" />
+    <Compile Include="Converters\ChatDirectionConverter.cs" />
+    <Compile Include="Converters\ChatImageConverter.cs" />
+    <Compile Include="Converters\ChatVisibilityConverter.cs" />
+    <Compile Include="Converters\OnlineConverter.cs" />
+    <Compile Include="Model\ContactInfo.cs" />
+    <Compile Include="Model\MessageClass.cs" />
+    <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\ChatView.xaml.cs">
       <DependentUpon>ChatView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Control\ChatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,6 +96,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Style\Contactstyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\ControlButtonStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -132,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="a3593cd5c1a10705658d230c8d5f202.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\gungun.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,4 @@
-﻿using Binding_demo.VIewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Binding_demo
+namespace WriteAble
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// UserControl1.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserControl1 : UserControl
     {
-        public MainWindow()
+        public UserControl1()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel("hah");
+            this.DataContext = new MainWindowViewModel();
         }
     }
 }

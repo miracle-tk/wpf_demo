@@ -60,6 +60,9 @@
     <Compile Include="Instrument.xaml.cs">
       <DependentUpon>Instrument.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RollingTextBlock.xaml.cs">
+      <DependentUpon>RollingTextBlock.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +76,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Instrument.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RollingTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

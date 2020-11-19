@@ -36,6 +36,7 @@ namespace MyBOEMobile.ViewModel
                 new WorkTab{Text="\xe60a",Content=null},
                 new WorkTab{Text="\xe63e",Content=null}
             };
+            SelectWorkTab = WorkTabs[0];
         }
     }
 

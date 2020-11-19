@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="/Style/SearchBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Style/ThemeStyle.xaml"/>
                 <ResourceDictionary Source="/Style/LeftListBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Style/ContactStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

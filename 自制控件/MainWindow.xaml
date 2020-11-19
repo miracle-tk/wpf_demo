@@ -9,17 +9,16 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <converter:TextBoxFloatConverter x:Key="floatCOnverter"/>
+       
+
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            
-        <Slider Width="500" Name="slider"  VerticalAlignment="Top" Minimum="0" Maximum="100" HorizontalAlignment="Left"  />
-            <TextBox Text="{Binding Value,ElementName=slider,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource floatCOnverter}}"/>
-        </StackPanel>
-        <local:Instrument Grid.Row="1" Value="{Binding Value,ElementName=slider}"/>
+        <local:RollingTextBlock Grid.Row="1" Width="20" Text="1sadfas1"/>
+        <TextBox Text="23423" />
     </Grid>
 </Window>

@@ -1,5 +1,4 @@
-﻿using Binding_demo.VIewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Binding_demo
+namespace MyBOEMobile.Control
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// ChatControl.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ChatControl : UserControl
     {
-        public MainWindow()
+        public ChatControl()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel("hah");
         }
     }
 }
