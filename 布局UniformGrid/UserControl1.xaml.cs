@@ -13,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace 自制控件
+namespace 布局UniformGrid
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// UserControl1.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserControl1 : UserControl
     {
-        public MainWindow()
+        public UserControl1()
         {
             InitializeComponent();
-        }
-
-        private void ColorPicker_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
-        {
-            // MessageBox.Show(((Color)e.OldValue).ToString() + "--->" + ((Color)e.NewValue).ToString());
-            tb.Text = ((Color)e.OldValue).ToString() + "--->" + ((Color)e.NewValue).ToString();
         }
     }
 }

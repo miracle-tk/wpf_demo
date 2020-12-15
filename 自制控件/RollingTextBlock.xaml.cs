@@ -39,7 +39,7 @@ namespace 自制控件
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.RegisterAttached("MyProperty", typeof(int), typeof(ownerclass), new PropertyMetadata(0));
+            DependencyProperty.RegisterAttached("MyProperty", typeof(int), typeof(RollingTextBlock), new PropertyMetadata(0));
 
 
 

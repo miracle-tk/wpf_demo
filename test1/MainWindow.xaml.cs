@@ -26,9 +26,8 @@ namespace test1
             InitializeComponent();
           // processBar1
             // var w =new Window1();
-            processBar1.Enabled = true;
-            processBar1.Clear();
-            Loaded += MainWindow_Loaded;
+           
+            //Loaded += MainWindow_Loaded;
 
         }
 
@@ -46,7 +45,7 @@ namespace test1
                 videoTimeArray[i].StartTime = date;
                 videoTimeArray[i].EndTime = end;
             }
-            processBar1.Init(startTime, videoTimeArray);
+         //   processBar1.Init(startTime, videoTimeArray);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -57,6 +56,11 @@ namespace test1
         private void ProcessBar1_ProgressChanged(object sender, ProgressEventargs args)
         {
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new Window2().Show();
         }
     }
 }

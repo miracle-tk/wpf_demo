@@ -10,25 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace 自制控件
+namespace test1
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// Window2.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Window2 : Window
     {
-        public MainWindow()
+        public Window2()
         {
             InitializeComponent();
+            Unloaded += Window2_Unloaded;
+            this.DataContext = new Window2VIewModel();
         }
 
-        private void ColorPicker_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        private void Window2_Unloaded(object sender, RoutedEventArgs e)
         {
-            // MessageBox.Show(((Color)e.OldValue).ToString() + "--->" + ((Color)e.NewValue).ToString());
-            tb.Text = ((Color)e.OldValue).ToString() + "--->" + ((Color)e.NewValue).ToString();
+            //form.Child = null;
+            //mainGrid.Children.Remove(form);
+            //form.Child
+            //mainGrid.Children.Remove(hidpic);
         }
     }
 }

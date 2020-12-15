@@ -9,16 +9,13 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <converter:TextBoxFloatConverter x:Key="floatCOnverter"/>
-       
-
-
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <local:RollingTextBlock Grid.Row="1" Width="20" Text="1sadfas1"/>
-        <TextBox Text="23423" />
+        <TextBlock Name="tb"></TextBlock>
+        <local:ColorPicker BorderBrush="Red" BorderThickness="2" Grid.Row="1" Color="#AAA" ColorChanged="ColorPicker_ColorChanged"  />
     </Grid>
 </Window>

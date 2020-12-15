@@ -1,0 +1,124 @@
+﻿<Window x:Class="PictureCompose.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PictureCompose"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Background="LightGray">
+    <Window.Resources>
+        <local:BrushToColorConverter x:Key="BrushToColorCOnverter"/>
+
+        <Style x:Key="RadioButtonStyle1" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid>
+                            <Border  x:Name="radioButtonBorder"  Background="{TemplateBinding Background}"  
+                                    BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="0" >
+                                <Border.Effect>
+                                    <DropShadowEffect Color="{Binding Background,ElementName=radioButtonBorder,Converter={StaticResource BrushToColorCOnverter}}"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <!--<ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>-->
+                        
+                        
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                               
+                             
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                               
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                               
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                               
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="BorderThickness" TargetName="radioButtonBorder" Value="3"/>
+                                <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="DarkGray"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Content="Open" Name="Image1Open" Click="Image1Open_Click"/>
+                <Border  Margin="2" Grid.Row="1" BorderBrush="Lime" BorderThickness="1">
+                    <Image PreviewDragEnter="Image1_DragEnter" PreviewDrop="Image1_Drop"  AllowDrop="True"  Name="image1"/>
+
+                </Border>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Content="Open" Name="Image2Open" Click="Image1Open_Click"/>
+                <Border Margin="2" Grid.Row="1" BorderBrush="Lime" BorderThickness="1">
+                    <Image  Name="image2"/>
+
+                </Border>
+            </Grid>
+        </Grid>
+        <StackPanel VerticalAlignment="Top" Grid.Column="1" >
+            <TextBlock Text="添加水印" Grid.Column="1" />
+            <TextBox Height="50"  VerticalAlignment="Top" Grid.Column="1" Name="watermark" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="水印位置（高度）" FontSize="10"/>
+                <TextBox Name="waterHeightPercent" Text="{Binding Path=Value,ElementName=slider,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"/>
+
+            </StackPanel>
+            <Slider Minimum="0" Name="slider" LargeChange="0.5" Maximum="100" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged"/>
+            <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                <RadioButton Name="Red" Checked="RadioButton_Checked"  Style="{DynamicResource RadioButtonStyle1}" Background="Red" IsChecked="False"/>
+                <RadioButton Name="Yellow" Checked="RadioButton_Checked" Margin="5,0,0,0"  Style="{DynamicResource RadioButtonStyle1}" Background="Yellow" IsChecked="False"/>
+                <RadioButton Name="DarkGray" Checked="RadioButton_Checked" Margin="5,0,0,0"  Style="{DynamicResource RadioButtonStyle1}" Background="DarkGray" IsChecked="False"/>
+                <RadioButton Name="White" Checked="RadioButton_Checked" Margin="5,0,0,0" Style="{DynamicResource RadioButtonStyle1}" Background="White" IsChecked="False"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Grid.Column="1" Content="====>" VerticalAlignment="Center" Height="100" Width="50" Name="btn_compose" Click="Btn_compose_Click"/>
+        <Border  Margin="2" BorderBrush="Lime" BorderThickness="1" Grid.Column="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Content="Save" Click="Button_Click"/>
+                <Image Name="destImage" Grid.Row="1" />
+            </Grid>
+
+        </Border>
+
+    </Grid>
+</Window>

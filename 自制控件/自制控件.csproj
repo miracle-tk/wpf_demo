@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Converter\HalfSizeConverter.cs" />
     <Compile Include="Converter\TextBoxFloatConverter.cs" />
+    <Compile Include="ColorPicker.cs" />
     <Compile Include="Instrument.xaml.cs">
       <DependentUpon>Instrument.xaml</DependentUpon>
     </Compile>
@@ -82,6 +83,14 @@
     <Page Include="RollingTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

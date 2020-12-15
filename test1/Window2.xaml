@@ -1,0 +1,27 @@
+﻿<Window x:Class="test1.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+             xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:local="clr-namespace:test1"
+        mc:Ignorable="d"
+        Title="Window2" Height="450" Width="800" Name="uc">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=uc}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UnloadedCommand, Mode=OneWay}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Name="mainGrid">
+        <wfi:WindowsFormsHost x:Name="form" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1" Height="1" >
+            <wf:Form TopLevel="False" x:Name="hidpic" BackgroundImageLayout="Stretch" ></wf:Form>
+        </wfi:WindowsFormsHost>
+        <Image Source="{Binding ImagePath}"/>
+    </Grid>
+</Window>

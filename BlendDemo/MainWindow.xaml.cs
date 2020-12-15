@@ -1,5 +1,4 @@
-﻿using MyBOEMobile.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyBOEMobile
+namespace BlendDemo
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -24,20 +23,6 @@ namespace MyBOEMobile
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
-        }
-
-        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
-            {
-                this.DragMove();
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("!!!!");
         }
     }
 }

@@ -62,9 +62,11 @@ namespace 自制控件
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(double), typeof(Instrument), new PropertyMetadata(0.0,new PropertyChangedCallback(OnValueChange)));
 
-        private static void OnValueChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+       private static void OnValueChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as Instrument).ValueChange();
+           
+            
         }
 
         private void Refresh()
