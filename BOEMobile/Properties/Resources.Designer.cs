@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyBOEMobile.Properties {
+namespace MyMobile.Properties {
     using System;
     
     

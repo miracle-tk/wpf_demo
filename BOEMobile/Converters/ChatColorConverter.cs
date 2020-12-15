@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace MyBOEMobile.Converters
+namespace MyMobile.Converters
 {
     public class ChatColorConverter : IValueConverter
     {

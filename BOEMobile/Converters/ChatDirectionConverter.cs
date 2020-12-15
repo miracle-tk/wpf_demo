@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace MyBOEMobile.Converters
+namespace MyMobile.Converters
 {
     public class ChatDirectionConverter : IValueConverter
     {

@@ -1,4 +1,4 @@
-﻿using MyBOEMobile.Model;
+﻿using MyMobile.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace MyBOEMobile.Converters
+namespace MyMobile.Converters
 {
     public class OnlineConverter : IValueConverter
     {

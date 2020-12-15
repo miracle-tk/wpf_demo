@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBOEMobile.Model
+namespace MyMobile.Model
 {
     public class ContactInfo:BindableBase
     {

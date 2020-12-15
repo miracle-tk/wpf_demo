@@ -1,4 +1,4 @@
-﻿using MyBOEMobile.ViewModel;
+﻿using MyMobile.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyBOEMobile
+namespace MyMobile
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑

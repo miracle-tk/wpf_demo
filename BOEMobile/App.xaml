@@ -1,7 +1,7 @@
-﻿<Application x:Class="MyBOEMobile.App"
+﻿<Application x:Class="MyMobile.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MyBOEMobile"
+             xmlns:local="clr-namespace:MyMobile"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
