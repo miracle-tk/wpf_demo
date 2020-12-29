@@ -58,12 +58,16 @@
     <Compile Include="Converter\HalfSizeConverter.cs" />
     <Compile Include="Converter\TextBoxFloatConverter.cs" />
     <Compile Include="ColorPicker.cs" />
+    <Compile Include="CustomDrawnElement.cs" />
+    <Compile Include="FlipPanel.cs" />
     <Compile Include="Instrument.xaml.cs">
       <DependentUpon>Instrument.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyGrid.cs" />
     <Compile Include="RollingTextBlock.xaml.cs">
       <DependentUpon>RollingTextBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WrapBreakPanel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,6 +89,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\ColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\FlipPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

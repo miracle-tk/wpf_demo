@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace 高性能图标
+namespace 高性能图表
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑

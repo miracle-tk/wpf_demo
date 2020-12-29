@@ -93,7 +93,7 @@
         </Grid>
         <StackPanel VerticalAlignment="Top" Grid.Column="1" >
             <TextBlock Text="添加水印" Grid.Column="1" />
-            <TextBox Height="50"  VerticalAlignment="Top" Grid.Column="1" Name="watermark" />
+            <TextBox Height="50"  VerticalAlignment="Top" Grid.Column="1" Name="watermark" TextWrapping="Wrap"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="水印位置（高度）" FontSize="10"/>
                 <TextBox Name="waterHeightPercent" Text="{Binding Path=Value,ElementName=slider,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"/>

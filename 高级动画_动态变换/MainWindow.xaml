@@ -40,7 +40,7 @@
         <Button Content="2" Height="50" Width="100" Style="{StaticResource buttonpendant}"/>
         <Button Content="3" Height="50" Width="100" Style="{StaticResource buttonpendant}"/>
         <Button Content="4" Height="50" Width="100" Style="{StaticResource buttonpendant}"/>
-        <Ellipse Margin="5" Name="ellipse" Stroke="Black" StrokeThickness="1" Width="200" Height="200" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown">
+        <Ellipse Margin="5" Name="ellipse" Stroke="Black" StrokeThickness="1" Width="200" Height="200" MouseMove="Ellipse_MouseMove" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown">
             <Ellipse.Fill>
                 <RadialGradientBrush RadiusX="1" RadiusY="1" GradientOrigin="0.5,0.5" >
                     <GradientStop Color="Red" Offset="0"/>

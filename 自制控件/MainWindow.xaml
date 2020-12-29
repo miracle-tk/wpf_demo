@@ -1,21 +1,109 @@
-﻿<Window x:Class="自制控件.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:自制控件"
         xmlns:converter="clr-namespace:自制控件.Converter"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="自制控件.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="850" Width="800">
     <Window.Resources>
         <converter:TextBoxFloatConverter x:Key="floatCOnverter"/>
+        <Style x:Key="myb" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     <Grid>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Name="tb"></TextBlock>
-        <local:ColorPicker BorderBrush="Red" BorderThickness="2" Grid.Row="1" Color="#AAA" ColorChanged="ColorPicker_ColorChanged"  />
+        <TextBlock x:Name="tb"/>
+        <local:ColorPicker BorderBrush="Red" BorderThickness="2" Grid.Row="1" Color="#AAA" ColorChanged="ColorPicker_ColorChanged"  >
+          
+        </local:ColorPicker>
+        <local:MyGrid>
+
+        </local:MyGrid>
+        <local:FlipPanel Grid.Row="2"  x:Name="panel">
+            <local:FlipPanel.FrontContent>
+                <StackPanel Margin="6">
+                    <TextBlock  Text="This is the front side of the FlipPanel" TextWrapping="Wrap" Margin="3" FontSize="16" Foreground="DarkOrange"/>
+                    <Button Margin="3" Padding="3" Content="BUtton one"  >
+                        
+                    </Button>
+                    <Button Margin="3" Padding="3" Content="BUtton two" Click="Button_Click"/>
+                    <Button Margin="3" Padding="3" Content="BUtton three"/>
+                    <Button Margin="3" Padding="3" Content="BUtton four"/>
+                </StackPanel>
+            </local:FlipPanel.FrontContent>
+            <local:FlipPanel.BackContent>
+                <Grid Margin=" 6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="This is the back side of the FlipPanel" TextWrapping="Wrap" Margin="3" FontSize="16"/>
+                    <Button Grid.Row="1" Content="to front" Click="Button_Click" Style="{StaticResource myb}"></Button>
+                </Grid>
+            </local:FlipPanel.BackContent>
+        </local:FlipPanel>
+        <!--<local:WrapBreakPanel Grid.Row="3">
+            <Button Height="50" Width="50" local:WrapBreakPanel.LineBreakBefore="True"></Button>
+            <Button Height="50" Width="50"></Button>
+            <Button Height="50" Width="50"></Button>
+            <Button Height="50" Width="50"></Button>
+            <Button Height="50" Width="50"></Button>
+            <Button Height="50" Width="50"></Button>
+            <Button Height="50" Width="50"></Button>
+            <Button Height="50" Width="50" local:WrapBreakPanel.LineBreakBefore="True"></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" ></Button>
+            <Button Height="50" Width="50" local:WrapBreakPanel.LineBreakBefore="True"></Button>
+        
+           
+            
+           
+        </local:WrapBreakPanel>-->
+        <TextBlock Grid.Row="3" Text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" FontSize="30"/>
+        <local:CustomDrawnElement Grid.Row="3"/>
+        
     </Grid>
 </Window>

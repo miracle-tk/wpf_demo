@@ -84,16 +84,21 @@ namespace PictureCompose
             BitmapSource btm1 = image1.Source as BitmapImage;
             BitmapSource btm2 = image2.Source as BitmapImage;
 
-            FormattedText signatureTxt = new FormattedText(watermark.Text, System.Globalization.CultureInfo.CurrentCulture,
-                FlowDirection.LeftToRight, new Typeface(SystemFonts.MessageFontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
-                50, waterBrush, VisualTreeHelper.GetDpi(this).PixelsPerDip);
-            var width = Math.Max(btm1.PixelWidth, btm2.PixelWidth);
-            var height = btm1.PixelHeight + btm2.PixelHeight;
+            //FormattedText signatureTxt = new FormattedText(watermark.Text, System.Globalization.CultureInfo.CurrentCulture,
+            //    FlowDirection.LeftToRight, new Typeface(SystemFonts.MessageFontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
+            //    50, waterBrush, VisualTreeHelper.GetDpi(this).PixelsPerDip);
+            var width =Convert.ToInt32( Math.Max(btm1.Width, btm2.Width));
+            var height =Convert.ToInt32( btm1.Height + btm2.Height);
+            var dpix = Math.Min(btm1.DpiX, btm2.DpiX);
+            var dpiy = Math.Min(btm1.DpiY, btm2.DpiY);
             RenderTargetBitmap composeImage = new RenderTargetBitmap(width, height,
-                                                                        btm1.DpiX, btm1.DpiY, PixelFormats.Default);
+                                                                        96,96, PixelFormats.Default);
+            FormattedText signatureTxt= MakeText(width);
+            signatureTxt.MaxTextWidth = width-50;
             DrawingVisual dv = new DrawingVisual();
             using (var context = dv.RenderOpen())
             {
+                
                 context.DrawImage(btm1, new Rect(0, 0, btm1.Width, btm1.Height));
                 context.DrawImage(btm2, new Rect(0, btm1.Height + 1, btm2.Width, btm2.Height));
                 context.DrawText(signatureTxt, new Point(50, composeImage.Height * Convert.ToDouble(waterHeightPercent.Text)/100));
@@ -102,6 +107,28 @@ namespace PictureCompose
             destImage.Source = composeImage;
         }
 
+        private FormattedText MakeText(int wide)
+        {
+           FormattedText signatureTxt = new FormattedText(watermark.Text, System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight, new Typeface(SystemFonts.MessageFontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
+                50, waterBrush, VisualTreeHelper.GetDpi(this).PixelsPerDip);
+           // InsertEnter(signatureTxt, wide);
+            return signatureTxt;
+        }
+
+        private void InsertEnter(FormattedText signatureTxt,int wide)
+        {
+            if (signatureTxt.Width <= wide)
+            {
+                return;
+            }
+            signatureTxt = new FormattedText(signatureTxt.Text.Insert(signatureTxt.Text.Length,"/n"), System.Globalization.CultureInfo.CurrentCulture,
+               FlowDirection.LeftToRight, new Typeface(SystemFonts.MessageFontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
+               50, waterBrush, VisualTreeHelper.GetDpi(this).PixelsPerDip);
+
+        }
+
+       
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();

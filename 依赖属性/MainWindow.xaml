@@ -13,8 +13,7 @@
         </GeometryGroup>
     </Window.Resources>
     <StackPanel>
-        <local:MyTextbox Panel.ZIndex="99"  Height="60" Width="200"  x:Name="mytb" MyTextProperty="hello" FontSize="50" BorderThickness="0"/>
-       
+        
         <Rectangle  Margin="0,0,0,0" Width="200" Height="60" RenderTransformOrigin="1,0.5">
             <Rectangle.Fill>
                 <VisualBrush Visual="{Binding ElementName=mytb}"/>

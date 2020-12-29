@@ -53,7 +53,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "可视化对象", "可视�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "动画基础", "动画基础\动画基础.csproj", "{885D17FE-FFD5-45FE-A011-7AED2A28027D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "高性能图标", "高性能图标\高性能图标.csproj", "{07A6DD25-E37C-4712-BD7A-1957671DF58F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "高性能图表", "高性能图标\高性能图表.csproj", "{07A6DD25-E37C-4712-BD7A-1957671DF58F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "高级动画_动态变换", "高级动画_动态变换\高级动画_动态变换.csproj", "{5A0665A8-360E-4B55-8DE9-72407F3DB11B}"
 EndProject
@@ -84,6 +84,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlendDemo", "BlendDemo\BlendDemo.csproj", "{DD00667F-E032-4256-94A3-9B523121E55E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureCompose", "PictureCompose\PictureCompose.csproj", "{61CB01EA-8D60-4D49-9A9F-36279C3F17ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawTools", "DrawTools-main\DrawTools.csproj", "{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -587,6 +589,18 @@ Global
 		{61CB01EA-8D60-4D49-9A9F-36279C3F17ED}.Release|x64.Build.0 = Release|Any CPU
 		{61CB01EA-8D60-4D49-9A9F-36279C3F17ED}.Release|x86.ActiveCfg = Release|Any CPU
 		{61CB01EA-8D60-4D49-9A9F-36279C3F17ED}.Release|x86.Build.0 = Release|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Debug|x64.Build.0 = Debug|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Debug|x86.Build.0 = Debug|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Release|x64.ActiveCfg = Release|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Release|x64.Build.0 = Release|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Release|x86.ActiveCfg = Release|Any CPU
+		{BE0F5277-A9A5-4235-AD1D-A68A72EDA03C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
