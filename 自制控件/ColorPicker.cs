@@ -22,6 +22,7 @@ namespace 自制控件
         static ColorPicker()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ColorPicker), new FrameworkPropertyMetadata(typeof(ColorPicker)));
+            
         }
 
         public override void OnApplyTemplate()

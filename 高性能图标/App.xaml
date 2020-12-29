@@ -1,7 +1,7 @@
-﻿<Application x:Class="高性能图标.App"
+﻿<Application x:Class="高性能图表.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:高性能图标"
+             xmlns:local="clr-namespace:高性能图表"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

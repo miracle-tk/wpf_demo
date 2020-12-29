@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace 高性能图标
+namespace 高性能图表
 {
     public class DrawingCanvas : Canvas
     {

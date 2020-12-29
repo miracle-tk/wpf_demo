@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="impl\HorizontalAxisLabel.cs" />
+    <Compile Include="impl\VerticalAxisTick.cs" />
+    <Compile Include="TypeConv\RangeConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -64,12 +67,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="chart.cs" />
+    <Compile Include="impl\AixsComponentBase.cs" />
+    <Compile Include="impl\AxisTick.cs" />
+    <Compile Include="impl\HorizontalAxisTick.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Range.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -95,5 +102,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

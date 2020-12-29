@@ -30,5 +30,11 @@ namespace 自制控件
             // MessageBox.Show(((Color)e.OldValue).ToString() + "--->" + ((Color)e.NewValue).ToString());
             tb.Text = ((Color)e.OldValue).ToString() + "--->" + ((Color)e.NewValue).ToString();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            panel.IsFlipped = !panel.IsFlipped;
+           
+        }
     }
 }

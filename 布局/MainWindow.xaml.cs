@@ -22,7 +22,13 @@ namespace 布局
     {
         public MainWindow()
         {
+            Loaded += MainWindow_Loaded;
             InitializeComponent();
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

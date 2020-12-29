@@ -51,5 +51,27 @@ namespace 高级动画_动态变换
         {
 
         }
+
+        private void Ellipse_MouseMove(object sender, MouseEventArgs e)
+        {
+            var pos = e.GetPosition(ellipse);
+            //var r = new RadialGradientBrush();
+            //r.GradientOrigin = pos;
+            //r.GradientStops.Add(new GradientStop());
+            //r.GradientStops.Add(new GradientStop());
+            //r.GradientStops[0].Color = Colors.Red;
+            //r.GradientStops[0].Offset = 0;
+            //r.GradientStops[1].Color = Colors.Yellow;
+            //r.GradientStops[1].Offset = 1;
+            //ellipse.Fill = r;
+            var brush = ellipse.Fill as RadialGradientBrush;
+            Point p = new Point(pos.X / ellipse.Width, pos.Y / ellipse.Height);
+            brush.GradientOrigin = p;
+
+            brush.GradientStops[0].Color = Colors.Red;
+            brush.GradientStops[0].Offset = 0;
+            brush.GradientStops[1].Color = Colors.Transparent;
+            brush.GradientStops[1].Offset = 0.8;
+        }
     }
 }

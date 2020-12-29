@@ -5,5 +5,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/自制控件;component/Themes/ColorPicker.xaml"/>
+        <ResourceDictionary Source="/自制控件;component/Themes/FlipPanel.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+
 </ResourceDictionary>
