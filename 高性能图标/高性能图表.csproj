@@ -55,7 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="impl\AxisLabel.cs" />
+    <Compile Include="impl\GridLineShape.cs" />
     <Compile Include="impl\HorizontalAxisLabel.cs" />
+    <Compile Include="impl\PolyFigure.cs" />
+    <Compile Include="impl\VerticalAxisLabel.cs" />
     <Compile Include="impl\VerticalAxisTick.cs" />
     <Compile Include="TypeConv\RangeConverter.cs" />
     <Page Include="MainWindow.xaml">

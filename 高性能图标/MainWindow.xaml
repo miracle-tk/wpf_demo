@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:高性能图表"
         xmlns:impl="clr-namespace:高性能图标.impl"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Foreground="Lime"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,16 +20,23 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="1">
-            <impl:HorizontalAxisLabel />
-            <impl:HorizontalAxisTick VerticalAlignment="Bottom " Range="0,100" LineLength="20"/>
+            <impl:HorizontalAxisLabel VerticalAlignment="Bottom" Step="20" Height="40"/>
+            <impl:HorizontalAxisTick VerticalAlignment="Bottom"  Range="0,100" LineLength="10"/>
 
         </Grid>
         <Grid Grid.Row="1">
             <impl:VerticalAxisTick Range="0,100" HorizontalAlignment="Right"/>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="2">
-            <impl:VerticalAxisTick  />
-
+        <Grid Grid.Row="1" Grid.Column="2" >
+            <impl:VerticalAxisTick HorizontalAlignment="Left" Margin="-10,0,0,0" />
+            <impl:VerticalAxisLabel  Step="20"/>
+            
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Border BorderBrush="Lime" >
+            <impl:GridLineShape StrokeDashArray="5 5"  Stroke="Red" StrokeDashCap="Round" />
+               
+            </Border>
         </Grid>
     </Grid>
 </Window>
