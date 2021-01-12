@@ -12,16 +12,213 @@
         Title="MainWindow" Height="450" Width="800" FontFamily="Consolas" Background="#cccccc">
     <Window.Resources>
         <converter:ImagepathTofontConverter x:Key="fontconverter"/>
+        <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Foreground" Value="{Binding (TextElement.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type FrameworkElement}}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="37"/>
+            <Setter Property="Height" Value="37"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="0.23" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="*" GeneratedDuration="0" GeneratedEasingFunction="{x:Null}" To="Checked">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="45"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.581"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="4.875"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.875"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle2">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-45"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle2">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.581"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle2">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="4.832"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle2">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-2.082"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle1">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.889"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle1">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-1"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="Checked" GeneratedDuration="0" GeneratedEasingFunction="{x:Null}" To="Unchecked">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle2">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle2">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle2">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle2">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle1">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle1">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="45" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle"/>
+                                            <DoubleAnimation Duration="0" To="0.581" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle"/>
+                                            <DoubleAnimation Duration="0" To="4.875" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle"/>
+                                            <DoubleAnimation Duration="0" To="1.875" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle"/>
+                                            <DoubleAnimation Duration="0" To="-45" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle2"/>
+                                            <DoubleAnimation Duration="0" To="0.581" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle2"/>
+                                            <DoubleAnimation Duration="0" To="4.832" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle2"/>
+                                            <DoubleAnimation Duration="0" To="-2.082" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle2"/>
+                                            <DoubleAnimation Duration="0" To="0.889" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle1"/>
+                                            <DoubleAnimation Duration="0" To="-1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle1"/>
+                                            <DoubleAnimation Duration="0" To="-180" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="rectangle2"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle2"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle2"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle2"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle1"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle1"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Viewbox>
+                                <Canvas x:Name="canvas" Height="24" RenderTransformOrigin="0.5,0.5" Width="24">
+                                    <Canvas.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Canvas.RenderTransform>
+                                    <Rectangle x:Name="rectangle" Fill="{TemplateBinding Foreground}" Height="2" Canvas.Left="3" RadiusY="0" RadiusX="0" RenderTransformOrigin="0.5,0.5" Canvas.Top="6" Width="18">
+                                        <Rectangle.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Rectangle.RenderTransform>
+                                    </Rectangle>
+                                    <Rectangle x:Name="rectangle1" Fill="{TemplateBinding Foreground}" Height="2" Canvas.Left="3" RadiusY="0" RadiusX="0" RenderTransformOrigin="0.5,0.5" Canvas.Top="11" Width="18">
+                                        <Rectangle.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Rectangle.RenderTransform>
+                                    </Rectangle>
+                                    <Rectangle x:Name="rectangle2" Fill="{TemplateBinding Foreground}" Height="2" Canvas.Left="3" RadiusY="0" RadiusX="0" RenderTransformOrigin="0.5,0.5" Canvas.Top="16" Width="18">
+                                        <Rectangle.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Rectangle.RenderTransform>
+                                    </Rectangle>
+                                </Canvas>
+                            </Viewbox>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="True"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Button Click="Button_Click" Content="test" FontSize="20"/>
         <TextBlock Name="filepath"/>
-        <TreeView Grid.Row="1" Name="tree" SelectedItemChanged="Tree_SelectedItemChanged" RenderTransformOrigin="0.5,0.5" >
+        <TreeView Grid.Row="1" Name="tree" SelectedItemChanged="Tree_SelectedItemChanged"  RenderTransformOrigin="0.5,0.5" >
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type model:NodeItem}" ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal">
@@ -30,48 +227,75 @@
                         <TextBlock Text="{Binding Name}" FontSize="15" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
-                
+
             </TreeView.ItemTemplate>
-            
+
         </TreeView>
-        <Border Name="bd_search" Opacity="100" HorizontalAlignment="Right" Background="#FFFFFF" Grid.Row="1" Width="700" Grid.RowSpan="2" Padding="5" RenderTransformOrigin="0.5,0.5">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="3" Color="#EEEEEE" Direction="120" ShadowDepth="5"/>
-            </Border.Effect>
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform x:Name="xpos" X="0"/>
-                </TransformGroup>
-            </Border.RenderTransform>
-            <StackPanel >
-                <ToggleButton HorizontalAlignment="Left" IsChecked="False"/>
-                <TextBlock Text="查找结果" FontSize="20" HorizontalAlignment="Center" >
-                    <TextBlock.Foreground>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFDDDDDD" Offset="0"/>
-                            <GradientStop Color="#FF342828" Offset="0.986"/>
-                        </LinearGradientBrush>
-                    </TextBlock.Foreground>
-                </TextBlock>
-                <ListView  Name="lv_findresult" >
+        <materialDesign:DrawerHost HorizontalAlignment="Right" Background="#FFFFFF" Grid.Row="1" VerticalAlignment="Top"  Grid.RowSpan="2" 
+            IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <ScrollViewer>
+                    <Border Name="bd_search" Opacity="100" HorizontalAlignment="Right" Background="#FFFFFF"  Padding="5" RenderTransformOrigin="0.5,0.5">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="3" Color="#EEEEEE" Direction="120" ShadowDepth="5"/>
+                        </Border.Effect>
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform x:Name="xpos" X="0"/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <StackPanel >
+                            <ToggleButton HorizontalAlignment="Left" 
+                                      Style="{StaticResource ToggleButtonStyle}"
+                                      IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+                            <TextBlock Text="查找结果" FontSize="20" HorizontalAlignment="Center" >
+                                <TextBlock.Foreground>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFDDDDDD" Offset="0"/>
+                                        <GradientStop Color="#FF342828" Offset="0.986"/>
+                                    </LinearGradientBrush>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                            <!--<ListView  Name="lv_findresult" >
                     <ListView.View>
                         <GridView>
+                            
                             <GridViewColumn  DisplayMemberBinding="{Binding Name}"  Header="Name" />
                             <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path}"   Header="Path" />
                             <GridViewColumn  DisplayMemberBinding="{Binding Size}"   Header="Size" />
                             <GridViewColumn Width="200" DisplayMemberBinding="{Binding Modified}"  Header="ModifiedTime" />
                         </GridView>
                     </ListView.View>
-                </ListView>
-            </StackPanel>
-           
-            
-        </Border>
+                </ListView>-->
+
+                            <DataGrid Name="lv_findresult"  AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Path" Binding="{Binding Path}"/>
+                                    <DataGridTextColumn Header="Size" Binding="{Binding Size}"/>
+                                    <DataGridTextColumn Header="ModifiedTime" Binding="{Binding Modified}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </StackPanel>
+
+
+                    </Border>
+                </ScrollViewer>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <ToggleButton       VerticalAlignment="Top"
+                                x:Name="MenuToggleButton"
+                                Style="{DynamicResource ToggleButtonStyle}"
+                                IsChecked="False"
+                               
+                                AutomationProperties.Name="HamburgerToggleButton"/>
+        </materialDesign:DrawerHost>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-        <TextBox  Grid.Column="0" VerticalAlignment="Center" Height="30" Name="tb_search" Margin="5,0,5,0"  Style="{StaticResource SearchBoxStyle }" Width="200" HorizontalAlignment="Left"></TextBox>
+            <TextBox Name="tb_currentPath" IsEnabled="True" MinWidth="300" Margin="10" FontSize="15" Background="#B1BABF" VerticalContentAlignment="Center"/>
+            <TextBox  Grid.Column="0" VerticalAlignment="Center" Height="30" Name="tb_search" Margin="10,0,5,0"  Style="{StaticResource SearchBoxStyle }" Width="200" HorizontalAlignment="Left"></TextBox>
             <Button Content="Search" Click="Button_Click_1"/>
         </StackPanel>
     </Grid>

@@ -44,14 +44,14 @@ namespace FileWatcher
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
            
-            var overTimeTask = Task.Delay(5000);
-            var loginTask = login();
-            var t = await Task.WhenAny(loginTask, overTimeTask);
-            if (t == overTimeTask)
-            {
-                MessageBox.Show("连接超时");
-                Application.Current.Shutdown();
-            }
+            //var overTimeTask = Task.Delay(5000);
+            //var loginTask = login();
+            //var t = await Task.WhenAny(loginTask, overTimeTask);
+            //if (t == overTimeTask)
+            //{
+            //    MessageBox.Show("连接超时");
+            //    Application.Current.Shutdown();
+            //}
             itemlist.Add(new NodeItem { Name = "/", IsDir = true, ParentPath = "/", ImagePath = "folder" });
             tree.ItemsSource = itemlist;
             lv_findresult.ItemsSource = findfilelist;
@@ -126,9 +126,16 @@ namespace FileWatcher
                 {
                     AddTreeChildren(node, false);
                 }
-
+                foreach (var child in node.Children)
+                {
+                    if (child.IsDir)
+                    {
+                        AddTreeChildren(child, true);
+                    }
+                }
                 
             }
+            tb_currentPath.Text = node.ParentPath + node.Name;
            
         }
 
@@ -164,13 +171,22 @@ namespace FileWatcher
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
             // /chfs/search
-           var r = await FindFile(tb_search.Text);
-            findfilelist.Clear();
-            foreach (var file in r.Files)
+            // var r = await FindFile(tb_search.Text);
+            //if (r.Files == null || r.Files.Count() <= 0)
+            //{
+            //    MessageBox.Show("查询到的文件太多！请精确查找");
+            //        return;
+            //}
+           var r = new List<FindFileModel> { new FindFileModel { Name = "ftp.txt", Modified = "2020.11.11",Path="/var" } };
+           
+            // findfilelist.Clear();
+            // foreach (var file in r.Files)
+            foreach (var file in r)
             {
                 findfilelist.Add(file);
             }
-            xpos.BeginAnimation(TranslateTransform.XProperty, searchBoxXposAni);
+            //xpos.BeginAnimation(TranslateTransform.XProperty, searchBoxXposAni);
+            MenuToggleButton.IsChecked = true;
         }
         private async Task<FindFileResult> FindFile(string name)
         {
