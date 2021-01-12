@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,9 +60,13 @@
     <Compile Include="impl\GridLineShape.cs" />
     <Compile Include="impl\HorizontalAxisLabel.cs" />
     <Compile Include="impl\PolyFigure.cs" />
+    <Compile Include="impl\PolylineAsync.cs" />
     <Compile Include="impl\VerticalAxisLabel.cs" />
     <Compile Include="impl\VerticalAxisTick.cs" />
     <Compile Include="TypeConv\RangeConverter.cs" />
+    <Compile Include="WriteableBitmapDemo.xaml.cs">
+      <DependentUpon>WriteableBitmapDemo.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,6 +83,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WriteableBitmapDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Range.cs" />

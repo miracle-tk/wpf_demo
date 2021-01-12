@@ -5,17 +5,13 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using 高性能图表;
-namespace test1
+
+namespace 装饰器
 {
     /// <summary>
     /// App.xaml 的交互逻辑
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            new 高性能图表.MainWindow().Show();
-        }
     }
 }

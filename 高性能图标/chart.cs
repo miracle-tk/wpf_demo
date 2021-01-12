@@ -22,6 +22,7 @@ namespace 高性能图表
         public DrawingCanvas()
         {
             this.Background = Brushes.Transparent;
+
             this.PreviewMouseLeftButtonDown += DrawingCanvas_MouseLeftButtonDown;
             this.PreviewMouseLeftButtonUp += DrawingCanvas_MouseLeftButtonUp;
             this.MouseMove += DrawingCanvas_MouseMove;
@@ -208,8 +209,8 @@ namespace 高性能图表
         private double yLabelMin = -100;
         private double canvasWidth = 0;
         private const int yLinesCount = 12;
-        DoubleCollection rtData;
-        DoubleCollection thData;
+        DoubleCollection rtData=new DoubleCollection();
+        DoubleCollection thData =new DoubleCollection();
         DoubleCollection mData;
         DoubleCollection sData;
         //使用DrawVisual画Polyline
