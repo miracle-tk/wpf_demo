@@ -9,9 +9,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:converter="clr-namespace:FileWatcher.converter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" FontFamily="Consolas" Background="#cccccc">
+        Title="MainWindow" Height="600" Width="1200" FontFamily="Microsoft YaHei UI" Background="#cccccc">
     <Window.Resources>
         <converter:ImagepathTofontConverter x:Key="fontconverter"/>
+        <converter:ImagepathToForegroundConverter x:Key="foregroundconverter"/>
         <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
             <Setter Property="Foreground" Value="{Binding (TextElement.Foreground), RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type FrameworkElement}}}"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -81,10 +82,10 @@
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle1">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-1"/>
                                                 </DoubleAnimationUsingKeyFrames>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas">
+                                                <!--<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas">
                                                     <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-                                                </DoubleAnimationUsingKeyFrames>
+                                                </DoubleAnimationUsingKeyFrames>-->
                                             </Storyboard>
                                         </VisualTransition>
                                         <VisualTransition From="Checked" GeneratedDuration="0" GeneratedEasingFunction="{x:Null}" To="Unchecked">
@@ -119,9 +120,9 @@
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle1">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
                                                 </DoubleAnimationUsingKeyFrames>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas">
+                                                <!--<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-                                                </DoubleAnimationUsingKeyFrames>
+                                                </DoubleAnimationUsingKeyFrames>-->
                                             </Storyboard>
                                         </VisualTransition>
                                     </VisualStateGroup.Transitions>
@@ -137,7 +138,7 @@
                                             <DoubleAnimation Duration="0" To="-2.082" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle2"/>
                                             <DoubleAnimation Duration="0" To="0.889" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle1"/>
                                             <DoubleAnimation Duration="0" To="-1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle1"/>
-                                            <DoubleAnimation Duration="0" To="-180" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas"/>
+                                            <!--<DoubleAnimation Duration="0" To="-180" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas"/>-->
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Unchecked">
@@ -152,7 +153,7 @@
                                             <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rectangle2"/>
                                             <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="rectangle1"/>
                                             <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="rectangle1"/>
-                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas"/>
+                                            <!--<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="canvas"/>-->
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -207,37 +208,84 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
+        <ContextMenu x:Key="TreeItemContextMenu" Name="contextmenu">
+            <!--<Button Name="btk_mkdir" Content="新建目录" Click="Btn_upload_Click"/>-->
+            <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Click="Button_Click_2">
+                创建目录
+            </Button>
+        </ContextMenu>
     </Window.Resources>
-    <Grid>
+    <materialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}">
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel Margin="16">
+                <StackPanel>
+                    <TextBox
+    Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Name="tb_newDIrName"
+    VerticalAlignment="Top" MinWidth="200"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    MaxWidth="400"
+    materialDesign:HintAssist.Hint="输入目录名称"></TextBox>
+
+                </StackPanel>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"  IsCancel="True" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                         CommandParameter="Sample2Cancel" HorizontalAlignment="Center" Click="cmBtn_createCata">OK</Button>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"  IsCancel="True" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                         CommandParameter="Sample2Cancel" HorizontalAlignment="Center">CANCEL</Button>
+            </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+            <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Button Click="Button_Click" Content="test" FontSize="20"/>
         <TextBlock Name="filepath"/>
-        <TreeView Grid.Row="1" Name="tree" SelectedItemChanged="Tree_SelectedItemChanged"  RenderTransformOrigin="0.5,0.5" >
+            <TreeView TreeViewItem.Selected="Tree_Selected" SelectedItemChanged="Tree_SelectedItemChanged"  TreeViewItem.Expanded="Tree_Expanded_1" PreviewMouseRightButtonDown="Tree_MouseRightButtonDown"  Grid.Row="1" Name="tree"   RenderTransformOrigin="0.5,0.5" >
+             
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type model:NodeItem}" ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock FontFamily="/asset/font/#iconfont" FontSize="21" Text="{Binding ImagePath,Converter={StaticResource fontconverter}}"/>
+                        <TextBlock FontWeight="Bold" Foreground="{Binding ImagePath,Converter={StaticResource foregroundconverter}}" FontFamily="/asset/font/#iconfont" FontSize="30" Text="{Binding ImagePath,Converter={StaticResource fontconverter}}"/>
 
                         <TextBlock Text="{Binding Name}" FontSize="15" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
             </TreeView.ItemTemplate>
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem" >
+                        <EventSetter Event="Selected" Handler="TreeViewItem_Selected"/>
+                        <Setter Property="Tag" Value="{Binding}"/>
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"   />
+                        <Setter Property="IsSelected" Value="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDir}" Value="true" >
+                                <Setter Property="ContextMenu" Value="{DynamicResource TreeItemContextMenu}"/>
+                            </DataTrigger>
+                            <!--<Trigger Property="IsExpanded" Value="true">
+                                <Setter Property="IsSelected" Value="True"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsExpanded" Value="false">
+                                <Setter Property="IsSelected" Value="False"></Setter>
+                            </Trigger>-->
 
+                        </Style.Triggers>
+                       
+                </Style>
+            </TreeView.ItemContainerStyle>
         </TreeView>
-        <materialDesign:DrawerHost HorizontalAlignment="Right" Background="#FFFFFF" Grid.Row="1" VerticalAlignment="Top"  Grid.RowSpan="2" 
+            <materialDesign:DrawerHost HorizontalAlignment="Right" Background="#FFFFFF" Grid.Row="1" VerticalAlignment="Top"  Grid.RowSpan="1" 
             IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
-            <materialDesign:DrawerHost.LeftDrawerContent>
-                <ScrollViewer>
+                <materialDesign:DrawerHost.LeftDrawerContent>
+
+
+
                     <Border Name="bd_search" Opacity="100" HorizontalAlignment="Right" Background="#FFFFFF"  Padding="5" RenderTransformOrigin="0.5,0.5">
                         <Border.Effect>
-                            <DropShadowEffect BlurRadius="3" Color="#EEEEEE" Direction="120" ShadowDepth="5"/>
+                            <DropShadowEffect BlurRadius="5" Color="#EEEEEE" Direction="-90" ShadowDepth="10"/>
                         </Border.Effect>
                         <Border.RenderTransform>
                             <TransformGroup>
@@ -247,7 +295,11 @@
                                 <TranslateTransform x:Name="xpos" X="0"/>
                             </TransformGroup>
                         </Border.RenderTransform>
-                        <StackPanel >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
                             <ToggleButton HorizontalAlignment="Left" 
                                       Style="{StaticResource ToggleButtonStyle}"
                                       IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
@@ -271,32 +323,50 @@
                     </ListView.View>
                 </ListView>-->
 
-                            <DataGrid Name="lv_findresult"  AutoGenerateColumns="False">
+                            <DataGrid IsReadOnly="True" PreviewMouseDoubleClick="Lv_findresult_PreviewMouseDoubleClick" RowHeaderWidth="50" AlternatingRowBackground="LightBlue" Grid.Row="1" SelectionUnit="Cell" CurrentCellChanged="Lv_findresult_CurrentCellChanged"   Name="lv_findresult"  ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"  AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                                    <DataGridTextColumn Header="Path" Binding="{Binding Path}"/>
-                                    <DataGridTextColumn Header="Size" Binding="{Binding Size}"/>
-                                    <DataGridTextColumn Header="ModifiedTime" Binding="{Binding Modified}"/>
+                                    <DataGridTextColumn  Header="Name" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn  Header="Path" Binding="{Binding Path}" IsReadOnly="True" />
+                                    <DataGridTextColumn  Header="Size" Binding="{Binding Size}" />
+                                    <DataGridTextColumn  Header="ModifiedTime" Binding="{Binding Modified}"/>
+                                    
                                 </DataGrid.Columns>
                             </DataGrid>
 
-                        </StackPanel>
+                        </Grid>
 
 
                     </Border>
-                </ScrollViewer>
-            </materialDesign:DrawerHost.LeftDrawerContent>
-            <ToggleButton       VerticalAlignment="Top"
+
+                </materialDesign:DrawerHost.LeftDrawerContent>
+                <ToggleButton       VerticalAlignment="Top"
                                 x:Name="MenuToggleButton"
-                                Style="{DynamicResource ToggleButtonStyle}"
+                                Style="{StaticResource ToggleButtonStyle}"
                                 IsChecked="False"
                                
                                 AutomationProperties.Name="HamburgerToggleButton"/>
-        </materialDesign:DrawerHost>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBox Name="tb_currentPath" IsEnabled="True" MinWidth="300" Margin="10" FontSize="15" Background="#B1BABF" VerticalContentAlignment="Center"/>
+            </materialDesign:DrawerHost>
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBox IsReadOnly="True" TextWrapping="Wrap" Name="tb_currentPath"  Text="/" IsEnabled="True" MinWidth="300" MaxWidth="500"  Margin="5" FontSize="13" Background="#B1BABF" VerticalContentAlignment="Center"/>
+            <Button Content="上传文件" Name="uploadbtn" Click="Uploadbtn_Click"/>
+            <Button Content="上传目录" Name="uploadCatabtn" Margin="3,0,0,0" Click="UploadCatabtn_Click"/>
             <TextBox  Grid.Column="0" VerticalAlignment="Center" Height="30" Name="tb_search" Margin="10,0,5,0"  Style="{StaticResource SearchBoxStyle }" Width="200" HorizontalAlignment="Left"></TextBox>
-            <Button Content="Search" Click="Button_Click_1"/>
+            <Button Content="Search" Click="Button_Click_1" IsDefault="True"/>
         </StackPanel>
+        <Border Grid.RowSpan="2" IsHitTestVisible="False" Opacity="0" Grid.Row="1" Background="DarkGray" Name="bd_mask">
+                <Grid>
+                    
+            <ProgressBar  Width="100" Height="100"
+            Style="{StaticResource MaterialDesignCircularProgressBar}" IsHitTestVisible="False"
+            Value="35"
+            IsIndeterminate="True" />
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Name="tb_currentfilecount" Text="{Binding CurrentFileCount,RelativeSource={RelativeSource AncestorType=Window},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="/"/>
+                        <TextBlock Name="tb_totalfilecount" Text="{Binding TotalFileCount,RelativeSource={RelativeSource AncestorType=Window},Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
     </Grid>
+    </materialDesign:DialogHost>
 </Window>

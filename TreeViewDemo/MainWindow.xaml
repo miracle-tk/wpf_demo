@@ -1,0 +1,24 @@
+﻿<Window x:Class="TreeViewDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TreeViewDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style TargetType="TreeViewItem">
+                <Setter Property="IsExpanded" Value="True"/>
+                <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                <EventSetter Event="Selected" Handler="TreeViewItem_Selected"/>
+            </Style>
+            <HierarchicalDataTemplate DataType="{x:Type local:Student}" ItemsSource="{Binding Students}">
+                <TextBlock Text="{Binding Name}"/>
+            </HierarchicalDataTemplate>
+        </StackPanel.Resources>
+        <Button Content="AddNew" Click="Button_Click"/>
+        <TreeView ItemsSource="{Binding}" Height="50" TreeViewItem.Selected="TreeView_Selected">
+        </TreeView>
+    </StackPanel>
+</Window>
