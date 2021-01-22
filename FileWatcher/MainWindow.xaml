@@ -214,6 +214,9 @@
                 创建目录
             </Button>
         </ContextMenu>
+        <ContextMenu x:Key="other">
+            <MenuItem Header="text"/>
+        </ContextMenu>
     </Window.Resources>
     <materialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}">
         <materialDesign:DialogHost.DialogContent>
@@ -243,11 +246,20 @@
         </Grid.RowDefinitions>
         <Button Click="Button_Click" Content="test" FontSize="20"/>
         <TextBlock Name="filepath"/>
-            <TreeView TreeViewItem.Selected="Tree_Selected" SelectedItemChanged="Tree_SelectedItemChanged"  TreeViewItem.Expanded="Tree_Expanded_1" PreviewMouseRightButtonDown="Tree_MouseRightButtonDown"  Grid.Row="1" Name="tree"   RenderTransformOrigin="0.5,0.5" >
+            <TreeView  TreeViewItem.Selected="Tree_Selected" SelectedItemChanged="Tree_SelectedItemChanged"   PreviewMouseRightButtonDown="Tree_MouseRightButtonDown"  Grid.Row="1" Name="tree"   RenderTransformOrigin="0.5,0.5" >
              
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type model:NodeItem}" ItemsSource="{Binding Children}">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Style.Triggers>
+                                         <DataTrigger Binding="{Binding IsDir}" Value="true" >
+                                            <Setter Property="ContextMenu" Value="{StaticResource TreeItemContextMenu}"/>
+                                         </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
                         <TextBlock FontWeight="Bold" Foreground="{Binding ImagePath,Converter={StaticResource foregroundconverter}}" FontFamily="/asset/font/#iconfont" FontSize="30" Text="{Binding ImagePath,Converter={StaticResource fontconverter}}"/>
 
                         <TextBlock Text="{Binding Name}" FontSize="15" Margin="5,0,0,0" VerticalAlignment="Center"/>
@@ -258,20 +270,25 @@
             <TreeView.ItemContainerStyle>
                 <Style TargetType="TreeViewItem" >
                         <EventSetter Event="Selected" Handler="TreeViewItem_Selected"/>
+                        <EventSetter Event="Drop" Handler="TreeViewItem_Drop"/>
+                        <EventSetter Event="Expanded" Handler="TreeViewItem_Expanded"/>
+                     
+                        <Setter Property="AllowDrop" Value="True"/>
                         <Setter Property="Tag" Value="{Binding}"/>
                         <Setter Property="IsExpanded" Value="{Binding IsExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"   />
                         <Setter Property="IsSelected" Value="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsDir}" Value="true" >
-                                <Setter Property="ContextMenu" Value="{DynamicResource TreeItemContextMenu}"/>
-                            </DataTrigger>
+
+                           
                             <!--<Trigger Property="IsExpanded" Value="true">
                                 <Setter Property="IsSelected" Value="True"></Setter>
                             </Trigger>
                             <Trigger Property="IsExpanded" Value="false">
                                 <Setter Property="IsSelected" Value="False"></Setter>
                             </Trigger>-->
-
+                            <!--<Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="IsSelected" Value="True"/>
+                            </Trigger>-->
                         </Style.Triggers>
                        
                 </Style>

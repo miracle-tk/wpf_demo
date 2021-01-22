@@ -21,20 +21,29 @@ namespace 异步
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            DoAsync();
+            Console.WriteLine("before do " + Thread.CurrentThread.ManagedThreadId.ToString());
+            await  DoAsync();
+            Console.WriteLine("after do " + Thread.CurrentThread.ManagedThreadId.ToString());
         }
 
-        private async void DoAsync()
+        private async Task DoAsync()
         {
-            await Task.Delay(5000);
-            MessageBox.Show(Thread.CurrentThread.ManagedThreadId.ToString());
+            Console.WriteLine("Before run " + Thread.CurrentThread.ManagedThreadId.ToString());
+            await Task.Run(async () => {
+
+                Thread.Sleep(3000);
+              Console.WriteLine("In run "+Thread.CurrentThread.ManagedThreadId.ToString());
+
+            });
+            Console.WriteLine("after run " + Thread.CurrentThread.ManagedThreadId.ToString());
         }
     }
 }

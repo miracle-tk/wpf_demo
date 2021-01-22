@@ -1,7 +1,7 @@
 ﻿using FileWatcher.CHFSApi;
 using FileWatcher.Model;
 using Microsoft.Win32;
-using RestSharp;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,7 +28,7 @@ namespace FileWatcher
         private bool flag = false;
         private object lockobj =new object();
         private List<String> list = new List<string>();
-        private RestResponseCookie cookie;
+     //   private RestResponseCookie cookie;
         private ObservableCollection<FindFileModel> findfilelist = new ObservableCollection<FindFileModel>();
         private ObservableCollection<NodeItem> itemlist = new ObservableCollection<NodeItem>();
         private DoubleAnimation searchBoxXposAni;
@@ -47,6 +47,7 @@ namespace FileWatcher
         }
         private int _currentFileCount;
         private  bool canScroll=false;
+        private bool isSearching=false;
 
         public int CurrentFileCount
         {
@@ -103,41 +104,40 @@ namespace FileWatcher
         }
 
         private async void  Button_Click(object sender, RoutedEventArgs e)
-        {
+        {  
            
-           
-
+          
 
         }
 
         
 
 
-        private async Task<bool> login()
-        {
-            //await Task.Delay(6000);
-            var client = new RestClient("http://10.80.145.8:989/chfs/session");
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-          //  request.AddHeader("Cookie", "JWT=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2MiOiJhZG1pbiIsImV4cCI6MTYxMDQyNDUyN30.6Wz8zSagZ-1xAc5zQ7khRWQlTfjd-9Z1-7bsP5WNBro; user=admin");
-            request.AlwaysMultipartFormData = true;
-            request.AddParameter("user", "FileWatcher");
-            request.AddParameter("pwd", "123456");
-            IRestResponse response =await client.ExecuteAsync(request);
-            if (response.StatusCode != HttpStatusCode.Created)
-            {
-                MessageBox.Show("登陆失败！");
-                return false;
-            }
-             cookie=response.Cookies.FirstOrDefault(x => x.Name == "JWT");
-            if (cookie == null)
-            {
-                MessageBox.Show("Cookie获取失败！");
-                return false; ;
-            }
-            return true;
+        //private async Task<bool> login()
+        //{
+        //    //await Task.Delay(6000);
+        //    var client = new RestClient("http://10.80.145.8:989/chfs/session");
+        //    client.Timeout = -1;
+        //    var request = new RestRequest(Method.POST);
+        //  //  request.AddHeader("Cookie", "JWT=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2MiOiJhZG1pbiIsImV4cCI6MTYxMDQyNDUyN30.6Wz8zSagZ-1xAc5zQ7khRWQlTfjd-9Z1-7bsP5WNBro; user=admin");
+        //    request.AlwaysMultipartFormData = true;
+        //    request.AddParameter("user", "FileWatcher");
+        //    request.AddParameter("pwd", "123456");
+        //    IRestResponse response =await client.ExecuteAsync(request);
+        //    if (response.StatusCode != HttpStatusCode.Created)
+        //    {
+        //        MessageBox.Show("登陆失败！");
+        //        return false;
+        //    }
+        //     cookie=response.Cookies.FirstOrDefault(x => x.Name == "JWT");
+        //    if (cookie == null)
+        //    {
+        //        MessageBox.Show("Cookie获取失败！");
+        //        return false; ;
+        //    }
+        //    return true;
            
-        }
+        //}
         private async Task<FileResult> getFile(string path)
         {
             // var client = new RestClient("http://10.80.145.8:989/chfs/files");
@@ -296,7 +296,7 @@ namespace FileWatcher
         private async void UploadFile(string dst,bool isDir)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-          
+            
             
             var open_result = ofd.ShowDialog();
 
@@ -413,6 +413,7 @@ namespace FileWatcher
         private async void UploadCatabtn_Click(object sender, RoutedEventArgs e)
         {
             WinForm.FolderBrowserDialog dialog = new WinForm.FolderBrowserDialog();
+            
             var result = dialog.ShowDialog();
             if (result == WinForm.DialogResult.OK)
             {
@@ -510,6 +511,10 @@ namespace FileWatcher
             try
             {
                 if (tb_newDIrName.Text == string.Empty) return;
+                if (tb_newDIrName.Text.Contains("@") || tb_newDIrName.Text.Contains("&") ||tb_newDIrName.Text.Contains("+")){
+                    MessageBox.Show("包含非法字符");
+                    return;
+                }
                 var name = tb_newDIrName.Text;
                 var b =await mkdir(name);
                 if (!b)
@@ -587,6 +592,7 @@ namespace FileWatcher
      //     await  AddTreeChildren(root,false);
              root.IsExpanded= true;
             var tempNode = root;
+            isSearching = true;
             foreach (var path in tempArry)
             {
                 if (!tempNode.IsDir)
@@ -596,8 +602,10 @@ namespace FileWatcher
                 }
                 var result = tempNode.Children.Where(x => x.Name == path).FirstOrDefault();
                 if (result == null) { return; }
-                
+                flag = false;
                 result.IsSelected = true;
+               //result.IsExpanded = true;
+
                 await Task.Run(() =>
                 {
                     while (!flag)
@@ -613,7 +621,7 @@ namespace FileWatcher
             }
             tempNode.IsExpanded = true;
             tempNode.IsSelected = true;
-           
+            isSearching = false;
         }
 
        
@@ -657,17 +665,33 @@ namespace FileWatcher
 
         }
 
-        private void Tree_Expanded_1(object sender, RoutedEventArgs e)
-        {
-          
-        }
-
+       
       
 
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            var element = sender as FrameworkElement;
-            element.BringIntoView();
+            if (isSearching)
+            {
+                var element = sender as FrameworkElement;
+                element.BringIntoView();
+              //  e.Handled = true;
+            }
+            
+        }
+
+        private void TreeViewItem_Drop(object sender, DragEventArgs e)
+        {
+           
+
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            e.Handled = true;
+            
+        }
+
+        private void TreeViewItem_Expanded(object sender, RoutedEventArgs e)
+        {
+            (sender as TreeViewItem).IsSelected = true;
+            e.Handled = true;
         }
     }
 }
