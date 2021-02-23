@@ -8,9 +8,9 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            <TextBox x:Name="tb1"></TextBox>
+            <TextBox x:Name="tb1" AllowDrop="True" DragLeave="Tb1_DragLeave"></TextBox>
             <TextBox x:Name="tb2"></TextBox>
-            <Label x:Name="label1" AllowDrop="True" Drop="Label1_Drop" MouseDown="Label1_MouseDown">label</Label>
+            <Label Background="Red"  x:Name="label1" AllowDrop="True" DragLeave="Label1_DragLeave" Drop="Label1_Drop" MouseDown="Label1_MouseDown" DragOver="Label1_DragOver">label</Label>
             <ListBox></ListBox>
         </StackPanel>
         

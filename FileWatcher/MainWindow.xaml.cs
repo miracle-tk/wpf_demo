@@ -643,7 +643,7 @@ namespace FileWatcher
                 //    }
                 //    else
                 //    {
-                await FillChildren(node);
+                 FillChildren(node);
                 
             }
             flag = true;
@@ -655,13 +655,14 @@ namespace FileWatcher
         {
             await AddTreeChildren(node, false);
             // }
-            foreach (var child in node.Children)
+           // Task.Run(() => { });
+            foreach (var child in node.Children.Where(n => n.IsDir))
             {
-                if (child.IsDir)
-                {
+                
                     await AddTreeChildren(child, false);
-                }
+                
             }
+            
 
         }
 
@@ -692,6 +693,7 @@ namespace FileWatcher
         {
             (sender as TreeViewItem).IsSelected = true;
             e.Handled = true;
+           
         }
     }
 }

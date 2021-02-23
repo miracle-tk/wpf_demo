@@ -10,7 +10,7 @@
     <Grid>
         <StackPanel>
             <GroupBox Header="list box1" BorderBrush="Red">
-            <ListBox  Name="lst" SelectionChanged="Lst_SelectionChanged">
+            <ListBox  Name="lst" SelectionChanged="Lst_SelectionChanged" ItemsSource="{Binding Path=}">
                 <CheckBox Margin="3">option 1</CheckBox>
                 <CheckBox Margin="3">option 2</CheckBox>
             </ListBox>

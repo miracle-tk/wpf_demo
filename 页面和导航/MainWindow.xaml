@@ -1,0 +1,22 @@
+﻿<Window x:Class="页面和导航.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:页面和导航"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <TextBlock Margin="3" TextWrapping="Wrap">
+                This is ordinary window content.
+            </TextBlock>
+            <Button Margin="3" Padding="3" Click="Button_Click">close</Button>
+        </StackPanel>
+        <Frame Name="frame" JournalOwnership="OwnsJournal" Grid.Column="1" Source="Page1.xaml" BorderBrush="Blue" BorderThickness="1"/>
+    </Grid>
+</Window>

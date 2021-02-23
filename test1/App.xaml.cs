@@ -13,9 +13,6 @@ namespace test1
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            new 高性能图表.MainWindow().Show();
-        }
+      
     }
 }

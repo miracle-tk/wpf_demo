@@ -35,7 +35,23 @@ namespace MouseDrag
 
         private void Label1_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            DataObject data = new DataObject(typeof(Label), this.label1);
             DragDrop.DoDragDrop((sender as Label), (sender as Label).Content, DragDropEffects.Link);
+        }
+
+        private void Label1_DragOver(object sender, DragEventArgs e)
+        {
+            
+        }
+
+        private void Tb1_DragLeave(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void Label1_DragLeave(object sender, DragEventArgs e)
+        {
+
         }
     }
 }

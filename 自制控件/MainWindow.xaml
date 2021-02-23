@@ -28,9 +28,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="tb"/>
-        <local:ColorPicker BorderBrush="Red" BorderThickness="2" Grid.Row="1" Color="#AAA" ColorChanged="ColorPicker_ColorChanged"  >
+        <local:ColorPicker x:Name="cp" BorderBrush="Red" BorderThickness="2" Grid.Row="1" Color="#AAA" ColorChanged="ColorPicker_ColorChanged"  >
           
-        </local:ColorPicker>
+        </local:ColorPicker >
         <local:MyGrid>
 
         </local:MyGrid>
@@ -103,7 +103,8 @@
            
         </local:WrapBreakPanel>-->
         <TextBlock Grid.Row="3" Text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" FontSize="30"/>
-        <local:CustomDrawnElement Grid.Row="3"/>
+        
+        <local:CustomDrawnElement Grid.Row="3" BackgroundColor="{Binding Color, ElementName=cp}"/>
         
     </Grid>
 </Window>

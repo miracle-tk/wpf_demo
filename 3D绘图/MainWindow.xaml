@@ -1,0 +1,37 @@
+﻿<Window x:Class="_3D绘图.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3D绘图"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="800">
+    <Grid>
+        <Viewport3D >
+        <Viewport3D.Camera>
+            <PerspectiveCamera Position="0,1,1" LookDirection="0,0,-1" UpDirection="0,1,0"/>
+        </Viewport3D.Camera>
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <DirectionalLight Direction="-1,-1,-1" Color="Wheat"/>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
+            <ModelVisual3D>
+                
+                <ModelVisual3D.Content>
+                    <GeometryModel3D>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D Positions="-1,0,0 0,1,0 1,0,0" TriangleIndices="0,1,2"/>
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial Brush="Yellow"/>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.BackMaterial>
+                            <DiffuseMaterial Brush="red"/>
+                        </GeometryModel3D.BackMaterial>
+                    </GeometryModel3D>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+        </Viewport3D>
+    </Grid>
+</Window>
