@@ -38,10 +38,10 @@ namespace 异步
         {
             Console.WriteLine("Before run " + Thread.CurrentThread.ManagedThreadId.ToString());
             await Task.Run(async () => {
-
-                Thread.Sleep(3000);
+                Console.WriteLine("bbIn run " + Thread.CurrentThread.ManagedThreadId.ToString());
+                await Task.Delay(5000);
               Console.WriteLine("In run "+Thread.CurrentThread.ManagedThreadId.ToString());
-
+            //    btn.Background = Brushes.Red; 上下文为新线程，报错
             });
             Console.WriteLine("after run " + Thread.CurrentThread.ManagedThreadId.ToString());
         }

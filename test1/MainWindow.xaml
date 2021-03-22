@@ -10,24 +10,45 @@
         xmlns:controls="clr-namespace:NetSDKCS.Control;assembly=NetSDKCSControl"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <DropShadowEffect x:Key="shadoweffect" Opacity="0.5" Color="Red" BlurRadius="50" Direction="315">
-
-        </DropShadowEffect>
-        <Style x:Key="ContentControlStyle1" TargetType="{x:Type ContentControl}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ContentControl}">
-                        <ContentPresenter/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+        <DataTemplate x:Key="ButtonContentTemplate">
+            <StackPanel Orientation="Horizontal" Background="Red">
+                <Grid Height="8" Width="8" >
+                    <Path HorizontalAlignment="Stretch"
+                            Margin="0,0,1.8,1.8"
+                            VerticalAlignment="Stretch" Stretch="Fill" Stroke="#FF000000"
+                            Data="M0.5,5.7 L0.5,0.5 L5.7,0.5"/>
+                    <Path HorizontalAlignment="Stretch"
+                            Margin="2,3,0,0"
+                                VerticalAlignment="Stretch" Stretch="Fill" Stroke="#FFFFFFFF"
+                            Data="M3.2,7.5 L7.5,7.5 L7.5,3.5"/>
+                    <Path HorizontalAlignment="Stretch"
+                            Margin="1.2,1.4,0.7,0.7"
+                            VerticalAlignment="Stretch" Fill="#FFFFFFFF" Stretch="Fill" Stroke="#FF000000"
+                            Data="M2.5,2.5 L7.5,7.5"/>
+                    <Path HorizontalAlignment="Stretch"
+                            Margin="1.7,2.0,1,1"
+                            VerticalAlignment="Stretch" Stretch="Fill" Stroke="#FF000000"
+                            Data="M3,7.5 L7.5,7.5 L7.5,3.5"/>
+                    <Path HorizontalAlignment="Stretch"
+                            Margin="1,1,1,1"
+                            VerticalAlignment="Stretch" Stretch="Fill" Stroke="#FFFFFFFF"
+                            Data="M1.5,6.5 L1.5,1 L6.5,1.5"/>
+                </Grid>
+                <ContentPresenter Content="{Binding}"/>
+            </StackPanel>
+        </DataTemplate>
+        <ControlTemplate TargetType="Button" x:Key="ButtonControlTemplate">
+            <Grid>
+                <Ellipse Width="50" Height="50" Fill="{TemplateBinding Background}"/>
+                <ContentPresenter HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+            </Grid>
+        </ControlTemplate>
     </Window.Resources>
-    <Grid>
-        <Button Width="200" Height="20" Content="click" Click="Button_Click_1"/>
-        <FrameworkElement Height="200" Width="200" IsHitTestVisible="True"/>
+    <StackPanel>
+        <Button ContentTemplate="{StaticResource ButtonContentTemplate}" Content="1"/>
+        <Button Template="{StaticResource ButtonControlTemplate}" Background="Yellow"  Content="2"/>
+        <Button Template="{StaticResource ButtonControlTemplate}" ContentTemplate="{StaticResource ButtonContentTemplate}" Content="3"/>
+    </StackPanel>
 
-
-    </Grid>
 </Window>

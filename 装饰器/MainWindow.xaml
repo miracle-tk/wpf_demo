@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Canvas Name="rootPanel">
+            <Button Canvas.Left="50" Canvas.Top="50" Height="300" Width="100" Content="1"/>
+        </Canvas>
+      
     </Grid>
 </Window>

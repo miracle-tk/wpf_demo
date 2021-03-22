@@ -5,14 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MouseDrag"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <StackPanel>
-            <TextBox x:Name="tb1" AllowDrop="True" DragLeave="Tb1_DragLeave"></TextBox>
-            <TextBox x:Name="tb2"></TextBox>
-            <Label Background="Red"  x:Name="label1" AllowDrop="True" DragLeave="Label1_DragLeave" Drop="Label1_Drop" MouseDown="Label1_MouseDown" DragOver="Label1_DragOver">label</Label>
-            <ListBox></ListBox>
-        </StackPanel>
+        Title="MainWindow" Height="450" Width="800"  >
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         
+       
+        <StackPanel  Name="sourcePanel" Background="Transparent" MouseMove="SourcePanel_MouseMove">
+            <Rectangle Height="50" Width="50" Fill="MediumVioletRed" Margin="5"/>
+            <Rectangle Height="50" Width="50" Fill="Yellow" Margin="5"/>
+            <Rectangle Height="50" Width="50" Fill="Green" Margin="5"/>
+            <Rectangle Height="50" Width="50" Fill="Black" Margin="5"/>
+            <Rectangle Height="50" Width="50" Fill="Purple" Margin="5"/>
+            <Rectangle Height="50" Width="50" Fill="White" Margin="5"/>
+            <Rectangle Height="50" Width="50" Fill="Gold" Margin="5"/>
+        </StackPanel>
+        <WrapPanel Name="targetPanel" Background="LightPink" Grid.Column="1" AllowDrop="True" Drop="TargetPanel_Drop"/>
+
     </Grid>
 </Window>

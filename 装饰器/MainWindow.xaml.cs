@@ -23,6 +23,19 @@ namespace 装饰器
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
+        }   
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+           var layer= AdornerLayer.GetAdornerLayer(rootPanel);
+            foreach (UIElement item in rootPanel.Children)
+            {
+
+                layer.Add(new CustomAdorner(item));
+
+            }
         }
     }
+   
 }
