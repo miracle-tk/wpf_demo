@@ -9,9 +9,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     
-    <!--<Window.DataContext>
+    <Window.DataContext>
         <vm:MainWindowViewModel/>
-    </Window.DataContext>-->
+    </Window.DataContext>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadCommand}"/>
@@ -86,6 +86,7 @@
             <ListBox ItemsSource="{Binding Colors}" ItemTemplate="{StaticResource combitem}"></ListBox>
             <TextBox Text="{Binding Test}"></TextBox>
             <Button Command="{Binding Change}" Style="{DynamicResource ButtonStyle1}">change</Button>
+            <TextBlock Text="{Binding Content}" Height="300"  FontSize="40" Foreground="Red" />
         </StackPanel>
     </Grid>
 </Window>

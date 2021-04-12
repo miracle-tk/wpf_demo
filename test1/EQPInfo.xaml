@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="test1.EQPInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:test1"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="200"  >
+    <UserControl.Resources>
+        <DataTemplate x:Key="infoDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <UniformGrid Columns="1" Grid.Column="1">
+                    <UniformGrid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="15"/>
+                        </Style>
+                    </UniformGrid.Resources>
+                    <TextBlock Text="Lot ID:" Foreground="Gray"/>
+                    <TextBlock Name="LotID"  Text="121"/>
+                    <TextBlock  Text="Glass ID:" Foreground="Gray"></TextBlock>
+                    <TextBlock Name="GlassID"  Text=""></TextBlock>
+                    <TextBlock   Text="PPID:" Foreground="Gray"></TextBlock>
+                    <TextBlock Name="PPID"  Text=""></TextBlock>
+                </UniformGrid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="alarmDataTemplate">
+            <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <UniformGrid Columns="1" Grid.Column="1">
+                        <UniformGrid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="15"/>
+                            </Style>
+                        </UniformGrid.Resources>
+                        <TextBlock Text="AlarmID" Foreground="Gray"></TextBlock>
+                        <TextBlock Text="" x:Name="AlarmID" Foreground="Red" ></TextBlock>
+                        <TextBlock Text="AlarmType" Foreground="Gray"></TextBlock>
+                        <TextBlock Text="" x:Name="AlarmType" Foreground="Red" ></TextBlock>
+                        <TextBlock Text="AlarmInfo" Foreground="Gray"></TextBlock>
+                        <TextBlock Text="" x:Name="AlarmText" Foreground="Red"  ></TextBlock>
+
+                    </UniformGrid>
+                </Grid>
+         </DataTemplate>
+    </UserControl.Resources>
+        <Border   Name="outBorder"  CornerRadius="10" BorderThickness="2" BorderBrush="Blue" Background="White">
+                <Border.Effect>
+                    <DropShadowEffect Color="blue" BlurRadius="10" Direction="270" ShadowDepth="0"/>
+                </Border.Effect>
+          
+            <Grid Background="Transparent" Margin="5">
+                <!--<Grid.OpacityMask>
+                <VisualBrush Visual="{Binding ElementName=outBorder}"/>
+            </Grid.OpacityMask>-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+            <TextBlock FontSize="20" Name="EQPName" Text="{Binding Path=EQPNameValue,RelativeSource={RelativeSource AncestorType=UserControl}}" FontWeight="Bold"  VerticalAlignment="Center" />
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="40"/>
+                            <Setter Property="Height" Value="20"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="blue"/>
+                            <Setter Property="FontFamily" Value="./#iconfont"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                    <Grid Background="Transparent"  Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                                        
+                                        <Border Name="bd" CornerRadius="10">
+                                            <ContentPresenter  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                        </Border>
+                                    </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="true">
+                                                <Setter Property="Background" Value="DarkGray" TargetName="bd"/>
+                                            </Trigger>
+                                        <EventTrigger RoutedEvent="Click">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetName="bd" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="Yellow" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                            
+                                        </EventTrigger>
+                                         
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                <Button Content="&#xe615;"  />
+                <Button Content="&#xe600;" Name="alarmSoundFlag"  />
+                <Button Content="&#xe876;"  Name="infoToalarm" Click="InfoToalarm_Click">
+                    
+                </Button>
+
+
+            </StackPanel>
+           
+            <!--下方设备信息和报警信息-->
+            <ContentControl Grid.Row="1">
+                <ContentControl.Style>
+                
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=infoToalarm,Path=Content}" Value="&#xe606;">
+                                <Setter Property="ContentTemplate" Value="{StaticResource alarmDataTemplate}"/>
+                        </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=infoToalarm,Path=Content}" Value="&#xe876;">
+                                <Setter Property="ContentTemplate" Value="{StaticResource infoDataTemplate}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                </Style>
+
+                </ContentControl.Style>
+            </ContentControl>
+            </Grid>
+            
+     
+    </Border>
+</UserControl>

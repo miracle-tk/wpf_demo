@@ -12,26 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace test1
+namespace WindowChromeDemo
 {
     /// <summary>
-    /// Window2.xaml 的交互逻辑
+    /// TestWIndow.xaml 的交互逻辑
     /// </summary>
-    public partial class Window2 : Window
+    public partial class TestWIndow : CustomWindow
     {
-        public Window2()
+        public TestWIndow()
         {
             InitializeComponent();
-            Unloaded += Window2_Unloaded;
-           
-        }
-
-        private void Window2_Unloaded(object sender, RoutedEventArgs e)
-        {
-            //form.Child = null;
-            //mainGrid.Children.Remove(form);
-            //form.Child
-            //mainGrid.Children.Remove(hidpic);
         }
     }
 }

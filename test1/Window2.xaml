@@ -7,9 +7,14 @@
          xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
              xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
          xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-        xmlns:local="clr-namespace:test1"
+        xmlns:local="clr-namespace:test1" 
+        
         mc:Ignorable="d"
-        Title="Window2" Height="450" Width="800" Name="uc">
+        Title="Window2" Height="450" Width="800" Name="uc" >
+    <Window.DataContext>
+        <local:Window2VIewModel/>
+    </Window.DataContext>
+    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=uc}" />
@@ -18,10 +23,35 @@
             <i:InvokeCommandAction Command="{Binding UnloadedCommand, Mode=OneWay}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Name="mainGrid">
-        <wfi:WindowsFormsHost x:Name="form" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1" Height="1" >
-            <wf:Form TopLevel="False" x:Name="hidpic" BackgroundImageLayout="Stretch" ></wf:Form>
-        </wfi:WindowsFormsHost>
-        <Image Source="{Binding ImagePath}"/>
-    </Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Visible">
+    <Grid Name="mainGrid" >
+
+            <ItemsControl ItemsSource="{Binding  Source={x:Static local:GolbalValue.DataList}}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="{Binding Path=(local:GolbalValue.MaxCol)}"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button Content="{Binding LineName}"/>
+                            <ItemsControl Grid.Row="1" ItemsSource="{Binding EQPList}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <local:EQPInfo Margin="5" EQPNameValue="{Binding EQPName}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                
+            </ItemsControl>
+
+        </Grid></ScrollViewer>
 </Window>

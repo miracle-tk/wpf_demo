@@ -10,12 +10,16 @@ using System.Windows.Media.Imaging;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Prism.Commands;
+using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace test1
 {
     public class Window2VIewModel:BindableBase
     {
+
         private CancellationTokenSource _cancelSource = new CancellationTokenSource();
+        
         private BitmapImage imagePath=new BitmapImage();
         public DelegateCommand UnloadedCommand { set; get; }
         public DelegateCommand<object> LoadedCommand { set; get; }
@@ -25,11 +29,48 @@ namespace test1
             get { return imagePath; }
             set {SetProperty(ref imagePath , value); }
         }
-        public Window2VIewModel()
+        private static ObservableCollection<LineInformation> datalist=new ObservableCollection<LineInformation>();
+
+        public static ObservableCollection<LineInformation> DataList
+        {
+            get { return datalist; }
+            set {datalist=value;
+                
+            }
+        }
+
+        public  Window2VIewModel()
         {
             LoadedCommand = new DelegateCommand<object>(Load);
             UnloadedCommand = new DelegateCommand(Unloaded);
-          
+            for (int i = 0; i < 5; i++)
+            {
+                var line = new LineInformation { LineName = $"{ i}" };
+                line.EQPList.Add(new EQPInformation { EQPName = "EGIS" });
+                line.EQPList.Add(new EQPInformation { EQPName = "EGIS1" });
+                DataList.Add(line);
+            }
+           
+           Task.Run(async () => {
+                var list = new List<LineInformation>();
+                while (true)
+                {
+                   // Thread.Sleep(1000);
+                   await Task.Delay(1000);
+                     list = DataList.ToList();
+                    LineInformation line = new LineInformation { LineName = $"0" };
+                    line.EQPList.Add(new EQPInformation { EQPName = "EGIS" });
+                    line.EQPList.Add(new EQPInformation { EQPName = "EGIS1" });
+                   Application.Current.Dispatcher.Invoke(new Action(() =>
+                   {
+                       DataList.Add(line);
+                 //  DataList= new ObservableCollection<LineInformation>(list);
+  
+                    }));
+                }
+
+
+            });
         }
         private void Unloaded()
         {
@@ -62,6 +103,7 @@ namespace test1
          await   Task.Run(() =>
             {
                 while (true)
+
                 {
                     if (_cancelSource.IsCancellationRequested)
                     {
@@ -101,4 +143,43 @@ namespace test1
             return bitmapImage;
         }
     }
+    public class EQPInformation: BindableBase
+    {
+        private string eqpname;
+
+        public string EQPName
+        {
+            get { return eqpname; }
+            set {
+               
+                SetProperty(ref eqpname, value);
+                
+            }
+        }
+
+
+    }
+    public class LineInformation : BindableBase
+    {
+        private string linename;
+
+        public string LineName
+        {
+            get { return linename; }
+            set { 
+                SetProperty(ref linename, value);
+            }
+        }
+      
+        private ObservableCollection<EQPInformation> eqplist=new ObservableCollection<EQPInformation>();
+
+        public ObservableCollection<EQPInformation> EQPList
+        {
+            get { return eqplist; }
+            set {  SetProperty(ref eqplist, value); }
+        }
+
+
+    }
+
 }

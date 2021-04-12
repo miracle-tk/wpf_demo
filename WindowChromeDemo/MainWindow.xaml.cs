@@ -10,28 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace test1
+namespace WindowChromeDemo
 {
     /// <summary>
-    /// Window2.xaml 的交互逻辑
+    /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class Window2 : Window
+    public partial class MainWindow : CustomWindow
     {
-        public Window2()
+        public MainWindow()
         {
             InitializeComponent();
-            Unloaded += Window2_Unloaded;
-           
         }
 
-        private void Window2_Unloaded(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //form.Child = null;
-            //mainGrid.Children.Remove(form);
-            //form.Child
-            //mainGrid.Children.Remove(hidpic);
+            TestWIndow tw = new TestWIndow();
+            tw.Show();
+            this.Close();
         }
     }
 }

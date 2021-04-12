@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="asddfa.cs" />
     <Compile Include="Converter\HalfSizeConverter.cs" />
     <Compile Include="Converter\TextBoxFloatConverter.cs" />
     <Compile Include="ColorPicker.cs" />

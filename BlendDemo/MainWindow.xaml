@@ -6,125 +6,15 @@
         xmlns:local="clr-namespace:BlendDemo"
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="BlendDemo.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Storyboard x:Key="Storyboard1">
-            <DoubleAnimationUsingPath Duration="0:0:2" Source="X" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="button" RepeatBehavior="Forever">
-                <DoubleAnimationUsingPath.PathGeometry>
-                    <PathGeometry Figures="M-76,53.750398 C-16,55.250409 0,-0.75 0,-0.75 L-16.5,51.75 z"/>
-                </DoubleAnimationUsingPath.PathGeometry>
-            </DoubleAnimationUsingPath>
-            <DoubleAnimationUsingPath Duration="0:0:2" Source="Y" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button" RepeatBehavior="Forever">
-                <DoubleAnimationUsingPath.PathGeometry>
-                    <PathGeometry Figures="M-76,53.750398 C-16,55.250409 0,-0.75 0,-0.75 L-16.5,51.75 z"/>
-                </DoubleAnimationUsingPath.PathGeometry>
-            </DoubleAnimationUsingPath>
-        </Storyboard>
-        <Storyboard x:Key="Storyboard2">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="textBox">
-                <SplineColorKeyFrame KeyTime="0:0:1.2" Value="#FF1B852E" KeySpline="0,1,1,1"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="Storyboard3">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="button1">
-                <SplineDoubleKeyFrame KeyTime="0:0:1" Value="0" KeySpline="0.77,0.01,0.36,0.92"/>
-                <SplineDoubleKeyFrame KeyTime="0:0:2" Value="1" KeySpline="0.73,0.01,0.18,0.99"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="button1">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="96"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button1">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="6.75"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="button1">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.621"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="button1">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.593"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="button1">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="3256.874"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-    </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
-            <BeginStoryboard Storyboard="{StaticResource Storyboard2}"/>
-            <BeginStoryboard Storyboard="{StaticResource Storyboard3}"/>
-        </EventTrigger>
-    </Window.Triggers>
+        Title="MainWindow" Height="450" Width="800" WindowStyle="ToolWindow">
 
     <Grid>
-        <Grid.Background>
-            <RadialGradientBrush GradientOrigin="0.8,0.5" Center="0.8,0.5">
-                <GradientStop Color="Black" Offset="0"/>
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FF5B5B5B" Offset="0.548"/>
-            </RadialGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="146*"/>
-            <RowDefinition Height="273*"/>
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="76*"/>
-        </Grid.ColumnDefinitions>
-
-        <RichTextBox HorizontalAlignment="Left" Height="81" Margin="91,12.313,0,0" VerticalAlignment="Top" Width="246" Grid.Column="1">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="49.5" Margin="35,42,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="94.5"/>
-        <Grid HorizontalAlignment="Left" Height="121" VerticalAlignment="Top" Width="212.5" Grid.Column="1" Margin="81.5,30,0,0" Grid.Row="1">
-            <RichTextBox Clip="M-200.00022,114 C-140.00035,107.99992 -130.00037,81.999576 -140.50035,107.49991 C-151.00033,133.00025 -224.50031,38.500622 -212.50026,61.000436 C-200.50022,83.50025 -233.50014,148 -209.5001,152.5 C-185.50007,157 -103,137.49999 -38.499995,150.99999 C26.000007,164.49999 305.00003,35.499997 305.00003,35.499997 C305.00003,35.499997 311.00003,116.5 318.50003,121">
-                <FlowDocument>
-                    <Paragraph/>
-                </FlowDocument>
-            </RichTextBox>
+        <Grid Background="Blue"  Height="300" Width="200">
+            <Menu >
+                <MenuItem  Header="ddd">
+                    <MenuItem Header="ccc" />
+                </MenuItem>
+            </Menu>
         </Grid>
-        <Path Data="M80,198 C68.999999,254.5 196.5,193 126,235 55.5,277 91.000001,141.5 80,198 z" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="55.723" Margin="89.322,122.495,0,0" Grid.Row="1" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="69.042"/>
-        <Path ClipToBounds="True" Grid.Column="1" Data="M390.5,367.5 C450.5,369 466.5,313 466.5,313 L450,365.49962 z" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="55.53" Margin="206.5,167,0,0" Grid.Row="1" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="77"/>
-        <Button x:Name="button" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Height="13.5" Margin="269.5,161.5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="27" RenderTransformOrigin="0.5,0.5">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Height="40.5" Margin="83,9.183,0,0" Grid.Row="1" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.5,0.5">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-
-        <ed:Callout AnchorPoint="0,1.5" CalloutStyle="Rectangle" Content="Callout" Grid.Column="1" FontSize="14.667" HorizontalAlignment="Left" Height="27" Margin="30,68,0,0" Stroke="Black" VerticalAlignment="Top" Width="47"/>
-        <Button Content="Button" Style="{DynamicResource SimpleButton}" Grid.Column="1" Margin="14.5,13,535.5,226" Grid.Row="1"/>
-        <Path Grid.Column="1" Data="M288,124 C291.91576,126.29544 318.0716,151.85919 316,127 314.86872,113.42466 313.3369,112.30105 294,120" HorizontalAlignment="Left" Height="23.562" Margin="104,115.228,0,0" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="29.117"/>
-        <Path Grid.Column="1" Data="M0.5,0.5 L100.5,0.5 L100.5,42.5 L0.5,42.5 z" HorizontalAlignment="Left" Height="43" Margin="36,63,0,0" Grid.Row="1" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="101"/>
-        <Path Grid.Column="1" HorizontalAlignment="Left" Height="53.5" Margin="144,16,0,0" Grid.Row="1" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="72.5" >
-
-        </Path>
-        <Path Grid.Column="1" Data="M16.604668,55.715583 L16.830509,55.915981 C18.136846,57.047573 19.552896,58.055881 21.060564,58.922809 L21.333288,59.075267 13.677829,64.5 z M53.161091,55.012527 L56.322178,64.5 48.218632,58.757751 48.500481,58.591117 C50.170521,57.576377 51.721748,56.38557 53.128391,55.044452 z M69.5,24.945825 L61.106815,30.89273 61.078289,30.720552 C60.722019,28.726034 60.146736,26.807388 59.378204,24.990381 L59.358814,24.946056 z M0.5,24.945825 L9.6411952,24.946033 9.6217937,24.990381 C8.9386567,26.605499 8.4082078,28.300924 8.0485448,30.058559 L8.0087823,30.266096 z M35.000004,0.5 L37.729351,8.6929812 37.260593,8.6393971 C36.352932,8.5472198 35.43198,8.4999995 34.5,8.4999995 33.801014,8.4999995 33.108234,8.5265603 32.422611,8.5787292 L32.305244,8.5891509 z" HorizontalAlignment="Left" Height="65" Margin="366,34,0,0" Grid.Row="1" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="70"/>
-        <Path Grid.Column="1" Data="M25.5,20.5 L25.5,34.5 54.5,34.5 54.5,20.5 z M0.5,0.5 L74.5,0.5 74.5,49.5 0.5,49.5 z" Fill="Black" HorizontalAlignment="Left" Height="50" Margin="221,24,0,0" Grid.Row="1" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="75" />
-        
     </Grid>
 </Window>

@@ -15,7 +15,7 @@
 
         </DataTemplate>
     </Window.Resources>
-    <Grid Background="LightBlue" Name="mainContainer" MouseLeftButtonDown="UniformGrid_MouseLeftButtonDown"
+    <Grid Background="Transparent" Name="mainContainer" MouseLeftButtonDown="UniformGrid_MouseLeftButtonDown"
                      MouseLeftButtonUp="UniformGrid_MouseLeftButtonUp"
                      MouseMove="UniformGrid_MouseMove">
         <UniformGrid Width="300" Height="300" Rows="3" Columns="3" >
