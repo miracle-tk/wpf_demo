@@ -64,7 +64,7 @@ namespace Binding_demo.VIewModels
                 int i = 0;
                 while (true)
                 {
-                    Thread.Sleep(2000);
+                    Thread.Sleep(2000); 
                     Content += i.ToString();
                     i++;
                 }
